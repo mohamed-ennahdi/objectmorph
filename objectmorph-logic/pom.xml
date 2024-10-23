@@ -2,7 +2,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>net.sourceforge.ennahdi.objectmorph</groupId>
 	<artifactId>objectmorph-logic</artifactId>
-	<version>1.7-SNAPSHOT</version>
+	<version>1.7</version>
 	<properties>
 		<maven.compiler.release>17</maven.compiler.release>
 	</properties>
@@ -27,7 +27,7 @@
 		<url>https://github.com/mohamed-ennahdi/objectmorph</url>
 		<developerConnection>
 			scm:git:https://github.com/mohamed-ennahdi/objectmorph.git</developerConnection>
-		<tag>HEAD</tag>
+		<tag>objectmorph-logic-1.7</tag>
 	</scm>
 
 	<developers>
