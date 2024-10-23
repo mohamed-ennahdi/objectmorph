@@ -1,17 +1,20 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>net.sourceforge.ennahdi.objectmorph</groupId>
 	<artifactId>objectmorph-logic</artifactId>
-	<version>1.0</version>
+	<version>1.0-SNAPSHOT</version>
 	<properties>
 		<maven.compiler.release>17</maven.compiler.release>
 	</properties>
 	<scm>
-		<connection>git:git@github.com:mohamed-ennahdi/objectmorph.git</connection>
-		<url>scm:git:git@github.com:mohamed-ennahdi/objectmorph.git</url>
-		<developerConnection>scm:git:git@github.com:mohamed-ennahdi/objectmorph.git</developerConnection>
-	  <tag>objectmorph-logic-1.0</tag>
-  </scm>
+		<connection>scm:git:https://github.com/mohamed-ennahdi/objectmorph.git</connection>
+		<url>https://github.com/mohamed-ennahdi/objectmorph</url>
+		<developerConnection>
+			scm:git:https://github.com/mohamed-ennahdi/objectmorph.git</developerConnection>
+		<tag>objectmorph-logic-1.0</tag>
+	</scm>
 	<dependencies>
 		<!--
 		https://mvnrepository.com/artifact/com.github.javaparser/javaparser-core -->
