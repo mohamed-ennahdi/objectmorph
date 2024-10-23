@@ -2,10 +2,25 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>net.sourceforge.ennahdi.objectmorph</groupId>
 	<artifactId>objectmorph-logic</artifactId>
-	<version>1.2-SNAPSHOT</version>
+	<version>1.1-SNAPSHOT</version>
 	<properties>
 		<maven.compiler.release>17</maven.compiler.release>
 	</properties>
+	
+	<packaging>jar</packaging>
+
+    <name>objectmorph-logic</name>
+    <description>This module helps to retrieve Java class source code metadata using javaparser API 
+    </description>
+    <url>https://github.com/mohamed-ennahdi/objectmorph</url>
+
+    <licenses>
+        <license>
+            <name>MIT License</name>
+            <url>http://www.opensource.org/licenses/mit-license.php</url>
+        </license>
+    </licenses>
+	
 	<scm>
 		<connection>scm:git:https://github.com/mohamed-ennahdi/objectmorph.git</connection>
 		<url>https://github.com/mohamed-ennahdi/objectmorph</url>
@@ -13,6 +28,16 @@
 			scm:git:https://github.com/mohamed-ennahdi/objectmorph.git</developerConnection>
 		<tag>objectmorph-logic-1.0</tag>
 	</scm>
+	
+	<developers>
+        <developer>
+            <name>Mohamed ENNAHDI EL IDRISSI</name>
+            <email>mohamed.ennahdi@gmail.com</email>
+            <organization>ENNAHDI</organization>
+            <organizationUrl>https://github.com/mohamed-ennahdi</organizationUrl>
+        </developer>
+    </developers>
+
 	<dependencies>
 		<!--
 		https://mvnrepository.com/artifact/com.github.javaparser/javaparser-core -->
@@ -31,11 +56,11 @@
 	<distributionManagement>
 		<snapshotRepository>
 			<id>ossrh</id>
-			<url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>
+			<url>https://oss.sonatype.org/content/repositories/snapshots</url>
 		</snapshotRepository>
 		<repository>
 			<id>ossrh</id>
-			<url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+			<url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
 		</repository>
 	</distributionManagement>
 </project>
