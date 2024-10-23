@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Class Diagram</title>
+		<script src="https://cdn.jsdelivr.net/npm/plain-draggable@2.5.12/plain-draggable.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/leader-line-new@1.1.9/leader-line.min.js"></script>
+	</head>
+	<body style="font-family: consolas" >
+		<div style="background-color: gray; margin:0 auto; width: 1080px; height: 768px; border:1px solid black;"  >
+			<table cellspacing="0" id="ParentClass" style="background-color: white;"  >
+				<tr style="outline: thin solid" >
+					<td>
+						<table>
+							<tr>
+								<td align="center" >
+									&laquo; Java Class &raquo;
+								</td>
+							</tr>
+							<tr valign="top" align="center" >
+								<td>
+									<img alt="" src="./class_obj.svg" style="top: 4px;position: relative;" />
+									<b>ParentClass</b>
+								</td>
+							</tr>
+							<tr>
+								<td style="background-color: lightyellow;" >
+									net.sourceforge.ennahdi.objectmorph.logic.example
+								</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr style="outline: thin solid" >
+					<td>
+						<table style="width: 100%" >
+							<tr>
+							<td width="6%" ><img alt="" src="./field_private_obj.svg" /></td>
+								<td>attribute0: int</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr style="outline: thin solid" >
+					<td>
+						<table style="width: 100%" >
+							<tr>
+								<td width="6%" ><img alt="" src="methdef_obj.svg" /><img alt="" src="constr_ovr.svg" style="position: relative; left: -6px; top: -4px;" /></td>
+								<td>ParentClass()</td>
+							</tr>
+							<tr>
+								<td ><img alt="" src="methdef_obj.svg" /></td>
+								<td>getAttribute0(): int</td>
+							</tr>
+							<tr>
+								<td ><img alt="" src="methpub_obj.svg" /></td>
+								<td>setAttribute0(int): void</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+			</table>
+			<table id="SourceCodeTestClass" cellspacing="0" style="background-color: white;" >
+				<tr style="outline: thin solid" >
+					<td>
+						<table>
+							<tr>
+								<td align="center" >
+									&laquo; Java Class &raquo;
+								</td>
+							</tr>
+							<tr valign="top" align="center" >
+								<td>
+									<img alt="" src="./class_obj.svg" style="top: 4px;position: relative;" />
+									<b>SourceCodeTestClass</b>
+								</td>
+							</tr>
+							<tr>
+								<td style="background-color: lightyellow;" >
+									net.sourceforge.ennahdi.objectmorph.logic.example
+								</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr style="outline: thin solid" >
+					<td>
+						<table style="width: 100%" >
+							<tr>
+								<td width="6%" ><img alt="" src="./field_private_obj.svg" /></td>
+								<td>attribute1: int</td>
+							</tr>
+							<tr>
+								<td><img alt="" src="./field_protected_obj.svg" /></td>
+								<td>attribute2: char</td>
+							</tr>
+							<tr>
+								<td><img alt="" src="./field_default_obj.svg" /></td>
+								<td>attribute3: String</td>
+							</tr>
+							<tr>
+								<td><img alt="" src="./field_public_obj.svg" /></td>
+								<td>attribute4: float</td>
+							</tr>
+							<tr>
+								<td><img alt="" src="field_default_obj.svg" /></td>
+								<td>attribute5: boolean</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr style="outline: thin solid" >
+					<td>
+						<table style="width: 100%" >
+							<tr>
+								<td width="6%" ><img alt="" src="methdef_obj.svg" /><img alt="" src="constr_ovr.svg" style="position: relative; left: -6px; top: -4px;" /></td>
+								<td>SourceCodeTestClass()</td>
+							</tr>
+							<tr>
+								<td ><img alt="" src="methdef_obj.svg" /></td>
+								<td>getAttribute1(): int</td>
+							</tr>
+							<tr>
+								<td ><img alt="" src="methpub_obj.svg" /></td>
+								<td>setAttribute1(int): void</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+			</table>
+			<table id="AnotherClass" style="background-color: white; top: 128px; position: relative;" >
+				<tr id="AnotherClassUnary" style="outline: thin solid" >
+					<td>
+						<table>
+							<tr>
+								<td align="center" >
+									&laquo; Java Class &raquo;
+								</td>
+							</tr>
+							<tr valign="top" align="center" >
+								<td>
+									<img alt="" src="./class_obj.svg" style="top: 4px;position: relative;" />
+									<b>AnotherClass</b>
+								</td>
+							</tr>
+							<tr>
+								<td style="background-color: lightyellow;" >
+									net.sourceforge.ennahdi.objectmorph.logic.example
+								</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr style="outline: thin solid" >
+					<td>
+						<table style="width: 100%" >
+							<tr>
+							<td width="6%" ><img alt="" src="./field_private_obj.svg" /></td>
+								<td>attribute6: Object</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr style="outline: thin solid" >
+					<td>
+						<table style="width: 100%" >
+							<tr>
+								<td  width="6%" ><img alt="" src="methdef_obj.svg" /></td>
+								<td>getAttribute6(): Object</td>
+							</tr>
+							<tr>
+								<td  width="6%" ><img alt="" src="methpub_obj.svg" /></td>
+								<td>setAttribute6(Object): void</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+			</table>
+		</div>
+		<script type="text/javascript">
+			var draggable1 = new PlainDraggable(document.getElementById('SourceCodeTestClass'), {onMove: fixLine});
+			draggable1.containment = {left: 200, top: 100};
+			var draggable2 = new PlainDraggable(document.getElementById('ParentClass'), {onMove: fixLine});
+			var draggable3 = new PlainDraggable(document.getElementById('AnotherClass'), {onMove: fixLine});
+			var line = new LeaderLine(
+				  document.getElementById('SourceCodeTestClass'),
+				  document.getElementById('ParentClass')
+				  , {
+						endPlug: 'arrow3',
+						path: 'straight',
+						color: 'black',
+						endPlugColor: 'white',
+						endPlugOutline: true,
+						outline: true,
+						outlineColor: "black",
+						endPlugSize: 5
+					});
+			var line1 = new LeaderLine(
+				  document.getElementById('SourceCodeTestClass'),
+				  document.getElementById('AnotherClass')
+				  , {
+					  	endPlug: 'behind',
+						path: 'straight',
+						color: 'black',
+						outline: true,
+						outlineColor: "black",
+					});
+			var line2 = new LeaderLine(
+				  document.getElementById('AnotherClass'),
+				  document.getElementById('AnotherClassUnary')
+				  , {
+					    startSocket: 'right',
+					    endSocket: 'top',
+					    path: 'grid',
+					    startSocketGravity: 100,
+					    endSocketGravity: 50,
+					    color: 'red',
+					    endPlug: 'behind'
+					  },);
+			function fixLine() {
+			  line.position();
+			  line1.position();
+			  line2.position();
+			}
+		</script>
+	</body>
+	<footer>
+		<div align="right" >
+			<a href="https://sourceforge.net/projects/objectmorph/" >By Ennahdi</a>
+		</div>
+	</footer>
+</html>
