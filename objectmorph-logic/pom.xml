@@ -1,10 +1,8 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>net.sourceforge.ennahdi.objectmorph</groupId>
 	<artifactId>objectmorph-logic</artifactId>
-	<version>1.3-SNAPSHOT</version>
+	<version>1.3</version>
 	<properties>
 		<maven.compiler.release>17</maven.compiler.release>
 	</properties>
@@ -29,7 +27,7 @@
 		<url>https://github.com/mohamed-ennahdi/objectmorph</url>
 		<developerConnection>
 			scm:git:https://github.com/mohamed-ennahdi/objectmorph.git</developerConnection>
-		<tag>HEAD</tag>
+		<tag>objectmorph-logic-1.3</tag>
 	</scm>
 
 	<developers>
