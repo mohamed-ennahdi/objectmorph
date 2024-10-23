@@ -1,4 +1,6 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>net.sourceforge.ennahdi.objectmorph</groupId>
 	<artifactId>objectmorph-logic</artifactId>
@@ -6,37 +8,38 @@
 	<properties>
 		<maven.compiler.release>17</maven.compiler.release>
 	</properties>
-	
+
 	<packaging>jar</packaging>
 
-    <name>objectmorph-logic</name>
-    <description>This module helps to retrieve Java class source code metadata using javaparser API 
-    </description>
-    <url>https://github.com/mohamed-ennahdi/objectmorph</url>
+	<name>objectmorph-logic</name>
+	<description>This module helps to retrieve Java class source code metadata
+		using javaparser API
+	</description>
+	<url>https://github.com/mohamed-ennahdi/objectmorph</url>
 
-    <licenses>
-        <license>
-            <name>MIT License</name>
-            <url>http://www.opensource.org/licenses/mit-license.php</url>
-        </license>
-    </licenses>
-	
+	<licenses>
+		<license>
+			<name>MIT License</name>
+			<url>http://www.opensource.org/licenses/mit-license.php</url>
+		</license>
+	</licenses>
+
 	<scm>
 		<connection>scm:git:https://github.com/mohamed-ennahdi/objectmorph.git</connection>
 		<url>https://github.com/mohamed-ennahdi/objectmorph</url>
 		<developerConnection>
 			scm:git:https://github.com/mohamed-ennahdi/objectmorph.git</developerConnection>
-	  <tag>HEAD</tag>
-  </scm>
-	
+		<tag>HEAD</tag>
+	</scm>
+
 	<developers>
-        <developer>
-            <name>Mohamed ENNAHDI EL IDRISSI</name>
-            <email>mohamed.ennahdi@gmail.com</email>
-            <organization>ENNAHDI</organization>
-            <organizationUrl>https://github.com/mohamed-ennahdi</organizationUrl>
-        </developer>
-    </developers>
+		<developer>
+			<name>Mohamed ENNAHDI EL IDRISSI</name>
+			<email>mohamed.ennahdi@gmail.com</email>
+			<organization>ENNAHDI</organization>
+			<organizationUrl>https://github.com/mohamed-ennahdi</organizationUrl>
+		</developer>
+	</developers>
 
 	<dependencies>
 		<!--
@@ -53,14 +56,16 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
+
 	<distributionManagement>
 		<snapshotRepository>
 			<id>ossrh</id>
-			<url>https://oss.sonatype.org/content/repositories/snapshots</url>
+			<url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>
 		</snapshotRepository>
 		<repository>
 			<id>ossrh</id>
-			<url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+			<url>
+				https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/</url>
 		</repository>
 	</distributionManagement>
 </project>
