@@ -1,0 +1,125 @@
+<html>
+    <head>
+        <script src="https://cdn.jsdelivr.net/npm/plain-draggable@2.5.12/plain-draggable.min.js">
+        </script>
+        <script src="https://cdn.jsdelivr.net/npm/leader-line-new@1.1.9/leader-line.min.js">
+        </script>
+    </head>
+    <body style="font-family: consolas">
+        <div style="background-color: gray; margin:0 auto; width: 1080px; height: 768px; border:1px solid black;">
+            <table style="background-color: white;" cellspacing="0" id="SourceCode1">
+                <tr style="outline: thin solid">
+                    <td>
+                        <table style="width: 100%">
+                            <tr>
+                                <td valign="top" align="center">
+                                    <img src="https://help.eclipse.org/latest/topic/org.eclipse.jdt.doc.user/images/org.eclipse.jdt.ui/obj16/class_obj.svg" style="top: 4px;position: relative;">
+                                    <b>
+                                        SourceCode1
+                                    </b>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="background-color: lightyellow;" align="center">
+                                    test
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr style="outline: thin solid">
+                    <td>
+                        <table style="width: 100%" width="6%">
+                            <tr>
+                                <td style="width: 6%">
+                                    <img src="https://help.eclipse.org/latest/topic/org.eclipse.jdt.doc.user/images/org.eclipse.jdt.ui/obj16/field_default_obj.svg">
+                                </td>
+                                <td>
+                                    attribute1: int
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 6%">
+                                    <img src="https://help.eclipse.org/latest/topic/org.eclipse.jdt.doc.user/images/org.eclipse.jdt.ui/obj16/field_default_obj.svg">
+                                </td>
+                                <td>
+                                    attribute2: String
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr style="outline: thin solid; display: none">
+                    <td>
+                        <table>
+                        </table>
+                    </td>
+                </tr>
+                <tr style="outline: thin solid">
+                    <td>
+                        <table>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+            <table style="background-color: white;" cellspacing="0" id="SourceCode2">
+                <tr style="outline: thin solid">
+                    <td>
+                        <table style="width: 100%">
+                            <tr>
+                                <td valign="top" align="center">
+                                    <img src="https://help.eclipse.org/latest/topic/org.eclipse.jdt.doc.user/images/org.eclipse.jdt.ui/obj16/class_obj.svg" style="top: 4px;position: relative;">
+                                    <b>
+                                        SourceCode2
+                                    </b>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="background-color: lightyellow;" align="center">
+                                    net.sourceforge.ennahdi
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr style="outline: thin solid">
+                    <td>
+                        <table style="width: 100%" width="6%">
+                            <tr>
+                                <td style="width: 6%">
+                                    <img src="https://help.eclipse.org/latest/topic/org.eclipse.jdt.doc.user/images/org.eclipse.jdt.ui/obj16/field_default_obj.svg">
+                                </td>
+                                <td>
+                                    attribute3: int
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 6%">
+                                    <img src="https://help.eclipse.org/latest/topic/org.eclipse.jdt.doc.user/images/org.eclipse.jdt.ui/obj16/field_default_obj.svg">
+                                </td>
+                                <td>
+                                    attribute4: SourceCode1
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr style="outline: thin solid; display: none">
+                    <td>
+                        <table>
+                        </table>
+                    </td>
+                </tr>
+                <tr style="outline: thin solid">
+                    <td>
+                        <table>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <script>
+             var draggable1 = new PlainDraggable(document.getElementById('SourceCode1'), {onMove: fixLine}); var draggable2 = new PlainDraggable(document.getElementById('SourceCode2'), {onMove: fixLine});  var line1 = new LeaderLine(document.getElementById('SourceCode2'), document.getElementById('SourceCode1'),   {endPlug: 'behind',path: 'straight',color: 'black',outline: true,outlineColor: 'black',}); function fixLine() {line1.position();  } 
+        </script>
+    </body>
+</html>
