@@ -1,10 +1,12 @@
 # Introduction
 
-To visualize a group of classes in a UML like class diagram can be useful in terms of understanding the overall business logic.
+To visualize a group of classes in a Eclipse like class diagram can be useful in terms of understanding the overall business logic.
 
 # Purpose
 
-The purpose of this project is to create an multi-module application that processes Java source code to render it as a class diagram.
+The purpose of this project is to create a multi-module application that processes Java source code to render it as a class diagram.
+
+![](https://a.fsdn.com/con/app/proj/objectmorph/screenshots/objectmorph-classdiagram-ef940eae.png/max/max/1)
 
 # Modules
 
