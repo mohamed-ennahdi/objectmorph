@@ -4,7 +4,7 @@ To visualize a group of classes in a Eclipse like class diagram can be useful in
 
 # Purpose
 
-The purpose of this project is to create a multi-module application that processes Java source code to render it as a class diagram.
+This is a multi-module application that processes Java source code to render it as a class diagram.
 
 ![](https://a.fsdn.com/con/app/proj/objectmorph/screenshots/objectmorph-classdiagram-ef940eae.png/max/max/1)
 
