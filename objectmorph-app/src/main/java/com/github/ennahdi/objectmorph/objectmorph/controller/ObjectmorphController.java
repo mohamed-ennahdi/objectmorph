@@ -8,11 +8,14 @@ import java.util.List;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.github.ennahdi.objectmorph.objectmorph.service.ObjectmorphService;
+
+import io.swagger.v3.oas.annotations.Parameter;
 
 @RestController
 public class ObjectmorphController {
@@ -34,8 +37,8 @@ public class ObjectmorphController {
 		return new ResponseEntity<>( "Hello World", HttpStatus.OK);
 	}
 	
-	@RequestMapping( value = "/html", method =  RequestMethod.GET )
-	public ResponseEntity<String> html(String[] sourceCode) {
+	@GetMapping( value = "/html" )
+	public ResponseEntity<String> html(@Parameter(name = "sourceCode", description = "Source Code", example = "class SourceCode { int attribute1; int attribute2; SourceCode(){} public int getAttribute1() { return attribute1;}}") String[] sourceCode) {
 		String html = "";
 		try {
 			html = objectmorphService.generateHTML(sourceCode);

@@ -26,11 +26,11 @@ public class ObjectmorphService {
 	}
 
 	public String generateHTML(String[] sourceCodes) throws IOException, URISyntaxException {
+		List<File> files = new ArrayList<>(); 
 		try {
 			String patternString = "(?<=class ).*?(?=\\s)";
 	        Pattern pattern = Pattern.compile(patternString);
 			
-			List<File> files = new ArrayList<>(); 
 			for (String  sourceCode: sourceCodes) {
 				Matcher matcher = pattern.matcher(sourceCode);
 				if (matcher.find()) {
@@ -48,6 +48,10 @@ public class ObjectmorphService {
 			throw e;
 		} catch (URISyntaxException e) {
 			throw e;
+		} finally {
+			for (File file : files) {
+				Files.delete(file.toPath());
+			}
 		}
 	}
 }
