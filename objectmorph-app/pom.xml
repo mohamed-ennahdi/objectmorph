@@ -9,7 +9,8 @@
 	</parent>
 	<artifactId>objectmorph-app</artifactId>
 	<properties>
-		<maven.compiler.release>17</maven.compiler.release>
+		<maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
 	</properties>
 	<name>objectmorph-app</name>
 	<description>Demo project for Spring Boot</description>

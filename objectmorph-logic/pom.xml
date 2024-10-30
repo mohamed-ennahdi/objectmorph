@@ -9,7 +9,8 @@
 	</parent>
 	<artifactId>objectmorph-logic</artifactId>
 	<properties>
-		<maven.compiler.release>17</maven.compiler.release>
+		<maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
 	</properties>
 	<description>This module helps to retrieve Java class source code metadata
 		using javaparser API
