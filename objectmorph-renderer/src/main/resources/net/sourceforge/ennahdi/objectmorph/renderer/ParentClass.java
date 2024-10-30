@@ -1,4 +1,4 @@
-package net.sourceforge.ennahdi.objectmorph.logic;
+package com.github.mohamedennahdi.objectmorph.logic;
 
 public class ParentClass {
 	private int attribute0;
