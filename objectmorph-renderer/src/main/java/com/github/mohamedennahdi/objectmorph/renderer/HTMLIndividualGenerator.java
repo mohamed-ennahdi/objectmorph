@@ -74,7 +74,7 @@ public class HTMLIndividualGenerator {
 		return table(
 				each(constructors, constructor -> tr(
 											td(
-													img().withSrc(RESOURCES_PATH + "/meth" + constructor.getAccessSpecifier().name().toLowerCase().substring(0, 3) + "_obj.svg"),
+													img().withSrc(RESOURCES_PATH + "/meth" + ("none".equals(constructor.getAccessSpecifier().name().toLowerCase()) ? "def" : constructor.getAccessSpecifier().name().toLowerCase().substring(0, 3)) + "_obj.svg"),
 													img().withSrc(RESOURCES_PATH_SPEC + "/constr_ovr.svg").withStyle("position: relative; left: -13px; top: -4px;")
 													),
 											td( constructor.getName().asString() + "(" + constructor.getParameters().stream().map(p -> p.getTypeAsString()).collect(Collectors.joining(",")) + ")")
