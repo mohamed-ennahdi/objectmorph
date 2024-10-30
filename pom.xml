@@ -14,6 +14,19 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
+	<scm>
+		<connection>scm:git:https://github.com/mohamed-ennahdi/objectmorph.git</connection>
+		<developerConnection>scm:git:https://github.com/mohamed-ennahdi/objectmorph.git</developerConnection>
+		<url>https://github.com/mohamed-ennahdi/objectmorph</url>
+	</scm>
+	<developers>
+		<developer>
+			<name>Mohamed ENNAHDI EL IDRISSI</name>
+			<email>mohamed.ennahdi@gmail.com</email>
+			<organization>ENNAHDI</organization>
+			<organizationUrl>https://github.com/mohamed-ennahdi</organizationUrl>
+		</developer>
+	</developers>
 	<dependencies>
 		<dependency>
 			<groupId>org.junit.jupiter</groupId>

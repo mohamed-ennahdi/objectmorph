@@ -21,19 +21,6 @@
 			<url>http://www.opensource.org/licenses/mit-license.php</url>
 		</license>
 	</licenses>
-	<developers>
-		<developer>
-			<name>Mohamed ENNAHDI EL IDRISSI</name>
-			<email>mohamed.ennahdi@gmail.com</email>
-			<organization>ENNAHDI</organization>
-			<organizationUrl>https://github.com/mohamed-ennahdi</organizationUrl>
-		</developer>
-	</developers>
-    <scm>
-        <connection>scm:git:https://github.com/mohamed-ennahdi/objectmorph.git</connection>
-        <developerConnection>scm:git:https://github.com/mohamed-ennahdi/objectmorph.git</developerConnection>
-        <url>https://github.com/mohamed-ennahdi/objectmorph</url>
-    </scm>
 	<dependencies>
 		<!--
 		https://mvnrepository.com/artifact/com.github.javaparser/javaparser-core -->
@@ -42,7 +29,5 @@
 			<artifactId>javaparser-core</artifactId>
 			<version>3.26.1</version>
 		</dependency>
-		
 	</dependencies>
-	
 </project>
