@@ -7,10 +7,6 @@ public class TestClass extends ParentClass {
 	public float attribute4;
 	boolean attribute5;
 	
-	protected ParentClass() {
-		
-	}
-	
 	public int getAttribute1() {
 		return attribute1;
 	}
@@ -40,9 +36,5 @@ public class TestClass extends ParentClass {
 	}
 	public void setAttribute5(boolean attribute5) {
 		this.attribute5 = attribute5;
-	}
-	
-	private String myMethod(double arg1, String arg2) {
-		
 	}
 }
