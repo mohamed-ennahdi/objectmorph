@@ -1,3 +1,13 @@
 spring:
   application:
     name: "objectmorph-app"
+logging:
+  level:
+    root: DEBUG
+    com:
+      github:
+        objectmorph: WARN
+  file.name: logs/objectmorph-app.log
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
+    file: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
