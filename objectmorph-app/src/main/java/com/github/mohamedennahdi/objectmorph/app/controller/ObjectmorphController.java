@@ -1,8 +1,5 @@
-package com.github.mohamedennahdi.objectmorph.objectmorph.controller;
+package com.github.mohamedennahdi.objectmorph.app.controller;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.net.URISyntaxException;
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
@@ -11,9 +8,10 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.github.mohamedennahdi.objectmorph.objectmorph.service.ObjectmorphService;
+import com.github.mohamedennahdi.objectmorph.app.service.ObjectmorphService;
 
 import io.swagger.v3.oas.annotations.Parameter;
 
@@ -38,20 +36,16 @@ public class ObjectmorphController {
 	}
 	
 	@GetMapping( value = "/html" )
-	public ResponseEntity<String> html(@Parameter(name = "sourceCode", description = "Source Code", example = "class SourceCode { int attribute1; int attribute2; SourceCode(){} public int getAttribute1() { return attribute1;}}") String[] sourceCode) {
-		String html = "";
+	public ResponseEntity<String> html(@Parameter(name = "sourceCode", description = "Source Code", example = "class SourceCode { int attribute1; int attribute2; SourceCode(){} public int getAttribute1() { return attribute1;}}") 
+									   @RequestParam("sourceCode")	String[] sourceCode) {
 		try {
+			String html = "";
 			html = objectmorphService.generateHTML(sourceCode);
-		} catch (FileNotFoundException e) {
+			return new ResponseEntity<>(html, HttpStatus.OK);
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (URISyntaxException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
 		}
-		return new ResponseEntity<>(html, HttpStatus.OK);
 	}
 }

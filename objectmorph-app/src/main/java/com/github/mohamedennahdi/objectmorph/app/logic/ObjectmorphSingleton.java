@@ -1,4 +1,4 @@
-package com.github.mohamedennahdi.objectmorph.objectmorph.logic;
+package com.github.mohamedennahdi.objectmorph.app.logic;
 
 import java.io.File;
 

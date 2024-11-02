@@ -1,4 +1,4 @@
-package com.github.mohamedennahdi.objectmorph.objectmorph;
+package com.github.mohamedennahdi.objectmorph.app;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
