@@ -3,7 +3,7 @@
 	<parent>
 		<groupId>com.github.mohamed-ennahdi</groupId>
 		<artifactId>objectmorph</artifactId>
-		<version>${objectmorph.parent.version}</version>
+		<version>0.0.3-SNAPSHOT</version>
 	</parent>
 	<artifactId>objectmorph-app</artifactId>
 	<properties>
@@ -26,7 +26,7 @@
 		<dependency>
 			<groupId>com.github.mohamed-ennahdi</groupId>
 			<artifactId>objectmorph-renderer</artifactId>
-			<version>${objectmorph.parent.version}</version>
+			<version>0.0.3-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springdoc</groupId>
