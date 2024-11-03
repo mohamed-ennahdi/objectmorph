@@ -1,7 +1,6 @@
 package com.github.mohamedennahdi.objectmorph.app.service;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.nio.charset.StandardCharsets;
@@ -15,16 +14,16 @@ import java.util.regex.Pattern;
 import org.apache.commons.io.FileUtils;
 import org.springframework.stereotype.Service;
 
-import com.github.mohamedennahdi.objectmorph.app.logic.ObjectmorphSingleton;
+import com.github.mohamedennahdi.objectmorph.app.logic.ObjectmorphComponent;
 
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Service
 public class ObjectmorphService {
-	ObjectmorphSingleton objectmorphLogic;
+	ObjectmorphComponent objectmorphLogic;
 	
-	public ObjectmorphService(ObjectmorphSingleton objectmorphLogic) {
+	public ObjectmorphService(ObjectmorphComponent objectmorphLogic) {
 		this.objectmorphLogic = objectmorphLogic;
 	}
 
