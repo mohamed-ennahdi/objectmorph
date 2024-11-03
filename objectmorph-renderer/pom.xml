@@ -15,7 +15,7 @@
 		<dependency>
 		    <groupId>com.github.mohamed-ennahdi</groupId>
 		    <artifactId>objectmorph-logic</artifactId>
-		    <version>${objectmorph.parent.version}</version>
+		    <version>${project.parent.version}</version>
 		</dependency>
 		<dependency>
 		    <groupId>com.j2html</groupId>

@@ -26,7 +26,7 @@
 		<dependency>
 			<groupId>com.github.mohamed-ennahdi</groupId>
 			<artifactId>objectmorph-renderer</artifactId>
-			<version>0.0.3-SNAPSHOT</version>
+			<version>${project.parent.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springdoc</groupId>
