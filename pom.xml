@@ -2,7 +2,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.github.mohamed-ennahdi</groupId>
 	<artifactId>objectmorph</artifactId>
-	<version>0.0.3-SNAPSHOT</version>
+	<version>${objectmorph.parent.version}</version>
 	<packaging>pom</packaging>
 	<modules>
 		<module>objectmorph-app</module>
@@ -11,6 +11,7 @@
 	</modules>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<objectmorph.parent.version>0.0.3-SNAPSHOT</objectmorph.parent.version>
 	</properties>
 	<scm>
 		<connection>scm:git:https://github.com/mohamed-ennahdi/objectmorph.git</connection>
