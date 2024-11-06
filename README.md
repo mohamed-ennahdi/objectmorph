@@ -2,6 +2,8 @@
 
 To visualize a group of classes in a Eclipse like class diagram can be useful in terms of understanding the overall business logic.
 
+This project was inspired by the eclipse plugin called ObjectAid, that is not being maintained anymore.
+
 # Purpose
 
 This is a multi-module application that processes Java source code to render it as a class diagram.
@@ -29,4 +31,6 @@ This module allows the consumption of objectmorph-renderer module through REST e
 
 # Conclusion
 
-This project offers an easy to deploy Spring Boot enabled application so that submitting Java source code files can be done easily through all kinds of interfaces.
+This project offers an easy way to deploy Spring Boot enabled application so that submitting Java source code files can be done easily through all kinds of interfaces.
+
+Eventually, the returned HTML code can be viewed in a browser and displays the source code as a class diagram.
