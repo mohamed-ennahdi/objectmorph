@@ -1,17 +1,16 @@
 package com.github.mohamedennahdi.objectmorph.app.service;
 
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.Writer;
 import java.net.URISyntaxException;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.apache.commons.io.FileUtils;
 import org.springframework.stereotype.Service;
 
 import com.github.mohamedennahdi.objectmorph.app.logic.ObjectmorphComponent;
@@ -39,8 +38,12 @@ public class ObjectmorphService {
 				if (matcher.find()) {
 					String fileName = matcher.group() + ".java";
 					log.info("Filename: " + fileName);
-					File file = Files.createFile(Paths.get(path + File.separator + fileName)).toFile();
-					FileUtils.writeStringToFile(file, sourceCode, StandardCharsets.UTF_8);
+					File file = new File(path + File.separator + fileName);
+					try (Writer fileWriter = new FileWriter(file, false)) {
+						fileWriter.write(sourceCode);
+					} catch (Exception e) {
+						throw e;
+					}
 					files.add(file);
 				}
 			}
@@ -49,6 +52,7 @@ public class ObjectmorphService {
 		} catch (Exception e) {
 			throw e;
 		} finally {
+			log.info("Files removal.");
 			for (File file : files) {
 				Files.delete(file.toPath());
 			}
