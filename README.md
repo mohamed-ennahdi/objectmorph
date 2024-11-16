@@ -23,7 +23,7 @@ This modules takes advantage of JavaParser frameworks that retrieves Java class 
 
 ## objectmorph-renderer
 
-This module  is built upon J2HTML framework, with an orchestration of the aforementionned module, with the aim to construct HTML pages based on Java source code elements.
+This module  is built upon J2HTML, (PlainDraggable)[https://github.com/anseki/plain-draggable], and (LeaderLine)[https://github.com/anseki/leader-line] frameworks, with an orchestration of the aforementionned module, with the aim to construct HTML pages based on Java source code elements.
 
 ## objectmorph-app
 
