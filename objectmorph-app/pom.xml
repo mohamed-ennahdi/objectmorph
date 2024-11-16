@@ -51,7 +51,7 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<version>3.3.5</version>
 				<configuration>
-					<imageName>objectmorph-app-image:${project.parent.version}</imageName>
+					<imageName>docker.io/ennahdi/${project.artifactId}:${project.version}</imageName>
 				</configuration>
 			</plugin>
 		</plugins>
