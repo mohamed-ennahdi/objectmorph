@@ -25,7 +25,7 @@ public class RelationRenderer {
 					JavaClassInterpreter interpreter2 = interpreters.get(j);
 					
 					if (interpreter1.getSuperClassName().equals(interpreter2.getClassName())) {
-						relations.add(new Relation(interpreter2.getClassName(), interpreter1.getSuperClassName(), LinkTypes.GENERALIZATION));
+						relations.add(new Relation(interpreter1.getClassName(), interpreter2.getClassName(), LinkTypes.GENERALIZATION));
 					} else if (interpreter2.getSuperClassName().equals(interpreter1.getClassName())) {
 						relations.add(new Relation(interpreter2.getClassName(), interpreter1.getClassName(), LinkTypes.GENERALIZATION));
 					}
@@ -60,14 +60,16 @@ public class RelationRenderer {
 		for (FieldDeclaration fieldDeclaration : fields1) {
 			VariableDeclarator varDecl = fieldDeclaration.getVariables().get(0);
 			if (varDecl.getTypeAsString().equalsIgnoreCase(interpreter2.getClassName())) {
-				relations.add(new Relation(interpreter1.getClassName(), interpreter2.getClassName(), LinkTypes.ASSOCIATION));
+				if (!relations.stream().anyMatch(e -> e.getFrom().equals(interpreter1.getClassName())))
+					relations.add(new Relation(interpreter1.getClassName(), interpreter2.getClassName(), LinkTypes.ASSOCIATION));
 			}
 		}
 		
 		for (FieldDeclaration fieldDeclaration : fields2) {
 			VariableDeclarator varDecl = fieldDeclaration.getVariables().get(0);
 			if (varDecl.getTypeAsString().equalsIgnoreCase(interpreter1.getClassName())) {
-				relations.add(new Relation(interpreter2.getClassName(), interpreter1.getClassName(), LinkTypes.ASSOCIATION));
+				if (!relations.stream().anyMatch(e -> e.getFrom().equals(interpreter2.getClassName())))
+					relations.add(new Relation(interpreter2.getClassName(), interpreter1.getClassName(), LinkTypes.ASSOCIATION));
 			}
 		}
 		
