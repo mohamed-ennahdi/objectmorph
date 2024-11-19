@@ -25,6 +25,11 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
         cache: maven
+    - name: Configure Git user
+      run: |
+        git config user.email "mohamed.ennahdi@gmail.com"
+        git config user.name "Mohamed Ennahdi El Idrissi"
     - name: Build with Maven
-      run: mvn -B test --file pom.xml
-      
+      run: mvn -B release:clean release:prepare release:perform --file pom.xml
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
