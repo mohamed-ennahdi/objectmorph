@@ -27,6 +27,12 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
         cache: maven
-    - name: Build with Maven
-      run: mvn -B spring-boot:build-image --file pom.xml
-      
+    - name: Create docker image and push to docker hub (latest version)
+      run: |
+        echo $RELEASE_VERSION
+        echo ${{ env.RELEASE_VERSION }} 
+        mvn -B spring-boot:build-image --file pom.xml
+        docker tag ennahdi/objectmorph-app:env.RELEASE_VERSION ennahdi/objectmorph-app
+        docker push ennahdi/objectmorph-app
+        docker tag ennahdi/objectmorph-app:env.RELEASE_VERSION ennahdi/objectmorph-app:env.RELEASE_VERSION
+        docker push ennahdi/objectmorph-app:env.RELEASE_VERSION
