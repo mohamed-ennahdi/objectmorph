@@ -9,7 +9,10 @@
 name: Java CI with Maven
 
 on:
-  workflow_dispatch:
+  push:
+    # Pattern matched against refs/tags
+    tags:        
+      - '*' 
 
 jobs:
   build:
