@@ -9,6 +9,9 @@
 name: Java CI with Maven
 
 on:
+  create:
+    tags:
+      - '*'
   push:
     # Pattern matched against refs/tags
     tags:        
