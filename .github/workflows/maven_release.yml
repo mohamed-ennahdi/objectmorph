@@ -31,5 +31,5 @@ jobs:
     - name: Build with Maven
       run: mvn -B release:clean release:prepare release:perform --file pom.xml
       env:
-        ENNAHDI_TOKEN: ${{ secrets.ENNAHDI_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.ENNAHDI_TOKEN }}
     
