@@ -9,16 +9,10 @@
 name: Java CI with Maven
 
 on:
-  release:
+  workflow_run:
+    workflows: ["Java CI with Maven to release latest SNAPSHOT version"]
     types:
-      - created
-  create:
-    tags:
-      - '**'
-  push:
-    # Pattern matched against refs/tags
-    tags:        
-      - '**' 
+      - completed
 
 jobs:
   build:
