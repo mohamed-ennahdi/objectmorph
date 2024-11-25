@@ -9,8 +9,9 @@
 name: Java CI with Maven to create and publish Docker image
 
 on:
-  release:
-    types: [published]
+  push:
+    tags:
+    - '*'
     
 jobs:
   build:
