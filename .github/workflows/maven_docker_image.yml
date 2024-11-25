@@ -9,11 +9,8 @@
 name: Java CI with Maven to create and publish Docker image
 
 on:
-  workflow_run:
-    workflows: ["Java CI with Maven to release latest SNAPSHOT version"]
-    types:
-      - completed
-
+  workflow_dispatch:
+    
 jobs:
   build:
 
