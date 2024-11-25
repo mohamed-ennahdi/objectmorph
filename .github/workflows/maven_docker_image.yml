@@ -6,7 +6,7 @@
 # separate terms of service, privacy policy, and support
 # documentation.
 
-name: Java CI with Maven
+name: Java CI with Maven to create and publish Docker image
 
 on:
   workflow_run:
@@ -30,7 +30,8 @@ jobs:
     - name: Create docker image and push to docker hub (latest version)
       run: |
         echo $RELEASE_VERSION
-        echo ${{ env.RELEASE_VERSION }} 
+        echo ${{ env.RELEASE_VERSION }}
+        cd objectmorph-app
         mvn -B spring-boot:build-image --file pom.xml
         docker tag ennahdi/objectmorph-app:env.RELEASE_VERSION ennahdi/objectmorph-app
         docker push ennahdi/objectmorph-app
