@@ -27,6 +27,11 @@ jobs:
         distribution: 'temurin'
         cache: maven
         server-id: github
+    - name: settings.xml
+      uses: s4u/maven-settings-action@v3.1.0
+      with:
+        servers: '[{"id": "github", "username": "mohamed-ennahdi", "password": ${{ secrets.ENNAHDI_TOKEN }} }]'
+        repositories: '[{"id":"github","name":"GitHub Packages","url":"https://maven.pkg.github.com/mohamed-ennahdi/objectmorph"}]'
     - name: Sleep for 90 seconds - Let caller workflow to release the artifact
       run: sleep 90s
       shell: bash
