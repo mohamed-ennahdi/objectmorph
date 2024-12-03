@@ -41,4 +41,5 @@ jobs:
         docker tag ennahdi/objectmorph-app:env.RELEASE_VERSION ennahdi/objectmorph-app:env.RELEASE_VERSION
         docker push ennahdi/objectmorph-app:env.RELEASE_VERSION
       env:
+        GITHUB_ACTOR: mohamed-ennahdi
         GITHUB_TOKEN: ${{ secrets.ENNAHDI_TOKEN }}
