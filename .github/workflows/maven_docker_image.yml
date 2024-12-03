@@ -36,8 +36,8 @@ jobs:
       run: |
         echo $RELEASE_VERSION
         echo ${{ env.RELEASE_VERSION }}
-        cd objectmorph-app
         mvn -B install --file pom.xml
+        cd objectmorph-app
         mvn -B spring-boot:build-image --file pom.xml
         docker tag ennahdi/objectmorph-app:env.RELEASE_VERSION ennahdi/objectmorph-app
         docker push ennahdi/objectmorph-app
