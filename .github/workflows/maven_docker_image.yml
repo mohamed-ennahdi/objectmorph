@@ -26,6 +26,7 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
         cache: maven
+        server-id: github
     - name: Sleep for 90 seconds - Let caller workflow to release the artifact
       run: sleep 120s
       shell: bash
