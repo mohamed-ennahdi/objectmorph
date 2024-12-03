@@ -75,5 +75,5 @@
 			<name>GitHub Packages</name>
 			<url>https://maven.pkg.github.com/mohamed-ennahdi/objectmorph</url>
 		</repository>
-	</distributionManagement
+	</distributionManagement>
 </project>
