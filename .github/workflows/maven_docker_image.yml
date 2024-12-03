@@ -26,6 +26,9 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
         cache: maven
+    - name: Sleep for 90 seconds - Let caller workflow to release the artifact
+      run: sleep 90s
+      shell: bash
     - name: Create docker image and push to docker hub (latest version)
       run: |
         echo $RELEASE_VERSION
