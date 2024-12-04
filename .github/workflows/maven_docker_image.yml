@@ -29,9 +29,6 @@ jobs:
         server-id: github
     - name: settings.xml
       run: cat /home/runner/.m2/settings.xml
-    - name: Sleep for 90 seconds - Let caller workflow to release the artifact
-      run: sleep 90s
-      shell: bash
     - name: Create docker image and push to docker hub (latest version)
       run: |
         echo $RELEASE_VERSION
@@ -39,10 +36,12 @@ jobs:
         mvn -B install --file pom.xml
         cd objectmorph-app
         mvn -B spring-boot:build-image --file pom.xml
-        docker tag ennahdi/objectmorph-app:env.RELEASE_VERSION ennahdi/objectmorph-app
-        docker push ennahdi/objectmorph-app
-        docker tag ennahdi/objectmorph-app:env.RELEASE_VERSION ennahdi/objectmorph-app:env.RELEASE_VERSION
-        docker push ennahdi/objectmorph-app:env.RELEASE_VERSION
       env:
         GITHUB_ACTOR: mohamed-ennahdi
         GITHUB_TOKEN: ${{ secrets.ENNAHDI_TOKEN }}
+    - name: Create docker image and push to docker hub (latest version)
+      run: |
+        docker tag ennahdi/$GITHUB_REF_NAME $GITHUB_REF_NAME
+        docker push ennahdi/$GITHUB_REF_NAME
+#        docker tag ennahdi/$GITHUB_REF_NAME ennahdi/objectmorph-app
+#        docker push ennahdi/objectmorph-app
