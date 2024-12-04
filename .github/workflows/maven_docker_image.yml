@@ -46,7 +46,7 @@ jobs:
         REF_NAME=$GITHUB_REF_NAME
         IMAGE_NAME="${REF_NAME//-/-app:}"
         echo $IMAGE_NAME
-        docker tag ennahdi/$IMAGE_NAME ennahdi/$GITHUB_REF_NAME
-        docker push ennahdi/$GITHUB_REF_NAME
+        docker tag ennahdi/$IMAGE_NAME ennahdi/$IMAGE_NAME
+        docker push ennahdi/$IMAGE_NAME
 #        docker tag ennahdi/$GITHUB_REF_NAME ennahdi/objectmorph-app
 #        docker push ennahdi/objectmorph-app
