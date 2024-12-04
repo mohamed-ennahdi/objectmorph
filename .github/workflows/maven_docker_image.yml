@@ -44,7 +44,7 @@ jobs:
     - name: Create docker image and push to docker hub (latest version)
       run: |
         REF_NAME=$GITHUB_REF_NAME
-        IMAGE_NAME="${REF_NAME//-/:}"
+        IMAGE_NAME="${REF_NAME//-/-app:}"
         echo $IMAGE_NAME
         docker tag ennahdi/$IMAGE_NAME ennahdi/$GITHUB_REF_NAME
         docker push ennahdi/$GITHUB_REF_NAME
