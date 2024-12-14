@@ -79,5 +79,8 @@ public class JavaClassInterpreter {
 	public int getInstanceId() {
 		return this.instanceId;
 	}
-
+	
+	public void resetInstanceId() {
+		INSTANCE_ID = 0;
+	}
 }

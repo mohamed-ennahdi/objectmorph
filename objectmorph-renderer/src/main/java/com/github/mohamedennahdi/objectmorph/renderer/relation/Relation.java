@@ -30,6 +30,16 @@ public class Relation {
 			"outlineColor: 'black',"+
 		"});";
 	
+	public static final String UNARY_PROPERTIES_SCRIPT =	" {" +
+			"startSocket: 'right'," +
+			"endSocket: 'top'," +
+			"path: 'grid'," +
+			"startSocketGravity: 100," +
+			"endSocketGravity: 50," +
+			"color: 'red'," +
+			"endPlug: 'behind'" +
+			"});";
+	
 	public Relation(String from, String to, LinkTypes linkType) {
 		super();
 		INSTANCE_ID ++;
@@ -67,5 +77,29 @@ public class Relation {
 	
 	public int getInstanceId() {
 		return instanceId;
+	}
+	
+	public void resetInstanceId() {
+		INSTANCE_ID = 0;
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if (obj == null) {
+			return false;
+        }
+		if (this == obj) {
+			return true;
+		}
+		if (!(obj instanceof Relation)) {
+			return false;
+		}
+		Relation r = (Relation) obj;
+		return (this.from.equals(r.getFrom()) && this.to.equals(r.getTo())) || (this.from.equals(r.getTo()) && this.to.equals(r.getFrom())) && this.linkType.equals(r.getLinkType());
+	}
+	
+	@Override
+	public int hashCode() {
+		return (this.from + this.to).hashCode();
 	}
 }
