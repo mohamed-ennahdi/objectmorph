@@ -78,7 +78,6 @@ public class HTMLGeneratorTextTest {
 		Path path = Paths.get(getClass().getClassLoader().getResource("UnaryTestClass.java.html").toURI());
 		String expected = Files.readString(path, StandardCharsets.UTF_8);
 		
-		System.out.println(actual);
 		assertEquals(StringUtils.replaceWhitespaceCharacters(expected, ""), StringUtils.replaceWhitespaceCharacters(actual, ""));
 	}
 }

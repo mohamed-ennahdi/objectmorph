@@ -120,7 +120,9 @@
             </table>
         </div>
         <script>
-             var draggable1 = new PlainDraggable(document.getElementById('SourceCode1'), {onMove: fixLine}); var draggable2 = new PlainDraggable(document.getElementById('SourceCode2'), {onMove: fixLine});  var line1 = new LeaderLine(document.getElementById('SourceCode1'), document.getElementById('SourceCode2'),   {endPlug: 'behind',path: 'straight',color: 'black',outline: true,outlineColor: 'black',}); function fixLine() {line1.position();  } 
+             var draggable1 = new PlainDraggable(document.getElementById('SourceCode1'), {onMove: fixLine});
+			 var draggable2 = new PlainDraggable(document.getElementById('SourceCode2'), {onMove: fixLine});
+			 var line1 = new LeaderLine(document.getElementById('SourceCode2'), document.getElementById('SourceCode1'),   {endPlug: 'behind',path: 'straight',color: 'black',outline: true,outlineColor: 'black',}); function fixLine() {line1.position();  } 
         </script>
     </body>
 </html>
