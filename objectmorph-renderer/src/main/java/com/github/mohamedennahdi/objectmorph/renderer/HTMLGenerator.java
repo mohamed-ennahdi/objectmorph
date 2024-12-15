@@ -11,17 +11,18 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
-import j2html.tags.specialized.TableTag;
 import com.github.mohamedennahdi.objectmorph.logic.JavaClassInterpreter;
 import com.github.mohamedennahdi.objectmorph.renderer.relation.Relation;
 import com.github.mohamedennahdi.objectmorph.renderer.relation.RelationRenderer;
 
+import j2html.tags.specialized.TableTag;
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 public class HTMLGenerator {
 	
 	List<JavaClassInterpreter> interpreters = new ArrayList<>();
@@ -35,13 +36,8 @@ public class HTMLGenerator {
 				tables.add(generator.generateFullClassHTML());
 				JavaClassInterpreter interpreter = generator.getInterpreter();
 				interpreters.add(interpreter);
-//			draggableScript += " var draggable" + interpreter.getInstanceId() +" = new PlainDraggable(document.getElementById('"+ interpreter.getClassName() +"'), {onMove: fixLine});";
-			} catch (URISyntaxException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (FileNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+			} catch (URISyntaxException | FileNotFoundException e) {
+				log.error(e.getMessage(), e);
 			}
 		}
 	}
