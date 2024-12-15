@@ -13,7 +13,9 @@ import com.github.javaparser.ast.body.ConstructorDeclaration;
 import com.github.javaparser.ast.body.FieldDeclaration;
 import com.github.javaparser.ast.body.MethodDeclaration;
 
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 public class JavaClassInterpreter {
 
 	
@@ -46,7 +48,7 @@ public class JavaClassInterpreter {
 				this.decl = cu.getClassByName(this.className).get();
 			}
 		} catch (FileNotFoundException e) {
-			e.printStackTrace();
+			log.error(e.getMessage(), e);
 		}
 	}
 	
@@ -79,5 +81,8 @@ public class JavaClassInterpreter {
 	public int getInstanceId() {
 		return this.instanceId;
 	}
-
+	
+	public void resetInstanceId() {
+		INSTANCE_ID = 0;
+	}
 }

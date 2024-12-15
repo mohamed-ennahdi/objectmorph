@@ -58,7 +58,7 @@
 	        			);
 	         }
 	    };
-	    var url = "https://objectmorph-app.onrender.com/html";
+	    var url = location.protocol + '//' + location.host + "/html";
 	    xhttp.open("POST", url, true);
 		var data = new FormData();
 		data.append('sourceCode', file);

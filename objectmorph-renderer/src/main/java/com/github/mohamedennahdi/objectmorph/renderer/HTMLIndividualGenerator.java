@@ -104,7 +104,8 @@ public class HTMLIndividualGenerator {
 							td(
 									this.generateClassHeaderHTML()
 								)
-							).withStyle("outline: thin solid"),
+							).withId(this.interpreter.getClassName() + "Unary")
+							 .withStyle("outline: thin solid"),
 					tr(
 							td(
 									this.generateAttributesHTML()
