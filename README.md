@@ -4,6 +4,8 @@ To visualize a group of classes in a Eclipse like class diagram can be useful in
 
 This project was inspired by the eclipse plugin called ObjectAid, that is not being maintained anymore.
 
+[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/h0GwFqhiWfs/0.jpg)](https://www.youtube.com/watch?v=h0GwFqhiWfs)
+
 # Purpose
 
 This is a multi-module application that processes Java source code to render it as a class diagram.
