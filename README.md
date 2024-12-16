@@ -33,6 +33,14 @@ This module  is built upon [J2HTML](https://j2html.com/), [PlainDraggable](https
 
 This module allows the consumption of objectmorph-renderer module through REST endpoints.
 
+# CI / CD
+
+Through Github Actions, there is a RELEASE workflow which is triggered manually. It creates a tag, and prepares the POM files to the next SNAPSHOT version.
+
+The tag creation triggers another workflow whose duty is to create and publish, in [Docker hub](https://hub.docker.com/r/ennahdi/objectmorph-app/tags), a new Docker image with the latest tag and version number tag.
+
+Render.com allows to deploy Spring Boot applications available as Docker images as Web Service.
+
 # Deployed Instance
 
 objectmorph-app is deployed under Render, and is accessible with the following url:
