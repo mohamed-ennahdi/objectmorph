@@ -33,6 +33,12 @@ This module  is built upon [J2HTML](https://j2html.com/), [PlainDraggable](https
 
 This module allows the consumption of objectmorph-renderer module through REST endpoints.
 
+# Deployed Instance
+
+objectmorph-app is deployed under Render, and is accessible with the following url:
+
+https://objectmorph-app.onrender.com/
+
 # Conclusion
 
 This project offers an easy way to deploy Spring Boot enabled application so that submitting Java source code files can be done easily through all kinds of interfaces.
