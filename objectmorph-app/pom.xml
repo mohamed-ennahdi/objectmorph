@@ -8,7 +8,7 @@
 	<artifactId>objectmorph-app</artifactId>
 	<properties>
 		<maven.compiler.source>17</maven.compiler.source>
-        <maven.compiler.target>17</maven.compiler.target>
+		<maven.compiler.target>17</maven.compiler.target>
 	</properties>
 	<name>objectmorph-app</name>
 	<description>Demo project for Spring Boot</description>
@@ -42,6 +42,12 @@
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
 			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.pdfcrowd</groupId>
+			<artifactId>pdfcrowd</artifactId>
+			<version>6.4.0</version>
+			<scope>compile</scope>
 		</dependency>
 	</dependencies>
 	<build>

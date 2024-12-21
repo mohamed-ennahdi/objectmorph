@@ -44,8 +44,11 @@ public class HTMLGenerator {
 	
 	public String generateFullHTML() throws FileNotFoundException, URISyntaxException {		
 		String draggableScript = "";		
+		short left = 0;
+		short top = 0;
 		for (JavaClassInterpreter interpreter : interpreters) {
 			draggableScript += "\n var draggable" + interpreter.getInstanceId() +" = new PlainDraggable(document.getElementById('"+ interpreter.getClassName() +"'), {onMove: fixLine});";
+			draggableScript += "\n     draggable" + interpreter.getInstanceId() +".top = "+ (top += 128) +";";
 		}
 		
 		List<Relation> relations = new ArrayList<>();

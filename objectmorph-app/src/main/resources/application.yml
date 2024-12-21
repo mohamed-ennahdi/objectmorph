@@ -6,3 +6,5 @@ logging:
     root: INFO
   pattern:
     console: "[%level] %d{yyyy-MM-dd HH:mm:ss} - %logger{1.} - %msg%n"
+server:
+  max-http-request-header-size: 65000

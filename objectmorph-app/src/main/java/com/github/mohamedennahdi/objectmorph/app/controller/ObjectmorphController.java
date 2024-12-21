@@ -35,4 +35,18 @@ public class ObjectmorphController {
 			return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
+	
+	@CrossOrigin(origins = "*")
+	@PostMapping( value = "/image" )
+	public ResponseEntity<String> image(@Parameter(name = "htmlCode", description = "Source Code", example = "class SourceCode { int attribute1; int attribute2; SourceCode(){} public int getAttribute1() { return attribute1;}}") 
+	@RequestParam("htmlCode")	String htmlCode) {
+		try {
+			String html = "";
+			objectmorphService.generateImange(htmlCode);
+			return new ResponseEntity<>("", HttpStatus.OK);
+		} catch (Exception e) {
+			log.error("Error in ObjectmorphController", e);
+			return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
 }
