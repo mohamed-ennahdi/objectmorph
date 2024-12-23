@@ -3,91 +3,69 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>Objectmorph-Sample-Client</title>
+		<script type="text/javascript" src="version.js" ></script>
 	</head>
-<body onload="getVersion()" >
-	<h1>Objectmorph Sample Client</h1>
-	<h3>This page executes client side code.</h3>
-	<h4>
-		<i>Executable locally.</i>
-	</h4>
-	<div align="center">
-		<textarea id="notepad" placeholder="drag and drop Java source code files here" cols="64" rows="16" readonly="readonly" ></textarea>
-	</div>
-</body>
-<footer >
-	<div align="right" >
-		<p align="right" >
-			Version: <b><label id="paragraphVersion" ></label></b>
-		</p>
-	</div>
-</footer>
-<script>
-	var notepad = document.getElementById('notepad');
-	var files = [];
-	function dropfile(file) {
-	  var reader = new FileReader();
-	  reader.onload = function(e) {
-		files.push(encodeURIComponent(e.target.result));
-	  };
-	  reader.readAsText(file, "UTF-8");
-	}
-
-	notepad.ondrop = function(e) {
-		e.preventDefault();
-		e.dataTransfer.setData("text/plain","data set in dragstart");
-		for (const file of e.dataTransfer.files) {
-			if (!file.name.includes(".java")) {
-				continue;
-			}
-			dropfile(file);
+	<body onload="getVersion()" >
+		<h1>Objectmorph Sample Client</h1>
+		<h3>This page executes client side code.</h3>
+		<h4>
+			<i>Executable locally.</i>
+		</h4>
+		<div align="center">
+			<textarea id="notepad" placeholder="drag and drop Java source code files here" cols="64" rows="16"  ></textarea>
+		</div>
+	</body>
+	<footer >
+		<div align="right" >
+			<p align="right" >
+				Version: <b><label id="paragraphVersion" ></label></b>
+			</p>
+		</div>
+	</footer>
+	<script>
+		var notepad = document.getElementById('notepad');
+		var files = [];
+		function dropfile(file) {
+		  var reader = new FileReader();
+		  reader.onload = function(e) {
+			files.push(e.target.result);
+		  };
+		  reader.readAsText(file, "UTF-8");
 		}
-		setTimeout(() => {
-			UserAction(files);
-	  	}, 250);
-	  	files = [];
-	};
 
-	function UserAction(file) {
-	    var xhttp = new XMLHttpRequest();
-	    xhttp.onreadystatechange = function() {
-	         if (this.readyState == 4 && this.status == 200) {
-	        	 console.log(this.responseText);
-	        	 const winUrl = URL.createObjectURL(
-	        			    new Blob([this.responseText], { type: "text/html" })
-	        			);
-	
-	        			const win = window.open(
-	        			    winUrl,
-	        			    "win",
-	        			    `width=512,height=512`
-	        			);
-	         } else {
-	        	 if (this.status >= 200) {
-	        	 	alert('Error: ' + this.status);
-	        	 }
-	         }
-	    };
-	    var url = location.protocol + '//' + location.host + "/html";
-	    xhttp.open("POST", url, true);
-		var data = new FormData();
-		data.append('sourceCode', file);
-	  	xhttp.send(data);
-	}
+		notepad.ondrop = function(e) {
+			e.preventDefault();
+			e.dataTransfer.setData("text/plain","data set in dragstart");
+			for (const file of e.dataTransfer.files) {
+				if (!file.name.includes(".java")) {
+					continue;
+				}
+				dropfile(file);
+			}
+			setTimeout(() => {
+				UserAction(files);
+		  	}, 250);
+		  	files = [];
+		};
 
-	function getVersion() {
-	    var xhttp = new XMLHttpRequest();
-	    xhttp.onreadystatechange = function() {
-	         if (this.readyState == 4 && this.status == 200) {
-	        	 document.getElementById("paragraphVersion").outerText = this.responseText;
-	         } else {
-	        	 if (this.status >= 400) {
-		        	 	alert('Error: ' + this.status);
-	        	 }
-	         }
-	    };
-	    var url = location.protocol + '//' + location.host + "/version";
-	    xhttp.open("GET", url, true);
-	  	xhttp.send(null);
-	}
-</script>
+		function UserAction(file) {
+		    var xhttp = new XMLHttpRequest();
+		    xhttp.onreadystatechange = function() {
+				if (this.readyState == 4) {
+					if (this.status == 200) {
+						console.log(this.responseText);
+						const winUrl = URL.createObjectURL(new Blob([this.responseText], { type: "text/html" }));
+						const win = window.open(winUrl, "win", `width=512,height=512`);
+			         } else {
+			        	 alert('Error: ' + this.status + " " + this.responseText);
+			    	}
+				};
+		    }
+		    var url = location.protocol + '//' + location.host + "/html";
+		    xhttp.open("POST", url, true);
+			var data = new FormData();
+			data.append('sourceCode', file);
+		  	xhttp.send(data);
+		}
+	</script>
 </html>
