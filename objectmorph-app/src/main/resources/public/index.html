@@ -1,21 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Welcome to ObjectMorph Application</title>
-</head>
-<body>
-	<h1>ObjectMorph application</h1>
-	<div>
-		<p>
-	    	The HTML endpoint: <a href="/html" >HTML Renderer</a>.
-	    </p>
-	    <p>
-	    	The Swagger page <a href="/swagger-ui/index.html" >here</a>.
-	    </p>
-	    <p>
-	    	Access to the sample client <a href="/client.html" >here</a>.
-	    </p>
-    </div>
-</body>
+	<head>
+		<meta charset="UTF-8">
+		<title>Welcome to ObjectMorph Application</title>
+		<script type="text/javascript" src="version.js"></script>
+	</head>
+	<body onload="getVersion()" >
+		<h1>ObjectMorph application <i>(Beta version)</i></h1>
+		<div>
+			<p>
+				The HTML endpoint: <a href="/html">HTML Renderer</a>.
+			</p>
+			<p>
+				The Swagger page <a href="/swagger-ui/index.html">here</a>.
+			</p>
+			<p>
+				Access to the sample client <a href="/client.html">here</a>.
+			</p>
+		</div>
+	</body>
+	<footer>
+		<div align="right">
+			<p align="right">
+				Version: <b><label id="paragraphVersion"></label></b>
+			</p>
+		</div>
+	</footer>
 </html>

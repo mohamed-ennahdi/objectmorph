@@ -1,8 +1,10 @@
 package com.github.mohamedennahdi.objectmorph.app.controller;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,6 +20,9 @@ public class ObjectmorphController {
 	
 	ObjectmorphService objectmorphService;
 	
+	@Value("${spring.application.version}")
+    private String applicationVersion;
+	
 	public ObjectmorphController(ObjectmorphService objectmorphService) {
 		this.objectmorphService = objectmorphService;
 	}
@@ -30,6 +35,17 @@ public class ObjectmorphController {
 			String html = "";
 			html = objectmorphService.generateHTML(sourceCode);
 			return new ResponseEntity<>(html, HttpStatus.OK);
+		} catch (Exception e) {
+			log.error("Error in ObjectmorphController", e);
+			return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
+	@CrossOrigin(origins = "*")
+	@GetMapping( value = "/version" )
+	public ResponseEntity<String> version() {
+		try {
+			return new ResponseEntity<>(applicationVersion, HttpStatus.OK);
 		} catch (Exception e) {
 			log.error("Error in ObjectmorphController", e);
 			return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);

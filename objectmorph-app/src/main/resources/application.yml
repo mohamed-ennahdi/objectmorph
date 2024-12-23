@@ -1,8 +1,14 @@
 spring:
   application:
-    name: "objectmorph-app"
+    name: "@project.name@"
+    version: "@project.version@"
+    description: "@project.description@"
+    groupId: "@project.groupId@"
+    artifactId: "@project.artifactId@"
 logging:
   level:
     root: INFO
   pattern:
     console: "[%level] %d{yyyy-MM-dd HH:mm:ss} - %logger{1.} - %msg%n"
+server:
+  max-http-request-header-size: 65000
