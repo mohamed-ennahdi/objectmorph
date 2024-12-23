@@ -36,7 +36,7 @@ public class ObjectmorphService {
 	        
 	        String path = System.getProperty("user.home");
 			for (String  sourceCode: sourceCodes) {
-				sourceCode = URLDecoder.decode(sourceCodes[0], Charset.forName("UTF-8"));
+				sourceCode = URLDecoder.decode(sourceCode, Charset.forName("UTF-8"));
 				Matcher matcher = pattern.matcher(sourceCode);
 				if (matcher.find()) {
 					String fileName = matcher.group() + ".java";
