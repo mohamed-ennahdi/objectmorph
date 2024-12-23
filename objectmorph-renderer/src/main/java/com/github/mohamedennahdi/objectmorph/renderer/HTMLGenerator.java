@@ -75,8 +75,12 @@ public class HTMLGenerator {
 		}
 		fixeLineScript += " } ";
 		
-		relations.get(0).resetInstanceId();
-		interpreters.get(0).resetInstanceId();
+		if (!relations.isEmpty()) {
+			relations.get(0).resetInstanceId();
+		}
+		if (!interpreters.isEmpty()) {
+			interpreters.get(0).resetInstanceId();
+		}
 				
 		return html(
 				head(

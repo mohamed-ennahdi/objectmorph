@@ -5,6 +5,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
 import java.net.URISyntaxException;
+import java.net.URLDecoder;
+import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
@@ -31,9 +33,10 @@ public class ObjectmorphService {
 		try {
 			String patternString = "(?<=class ).*?(?=\\s)";
 	        Pattern pattern = Pattern.compile(patternString);
-			
+	        
 	        String path = System.getProperty("user.home");
 			for (String  sourceCode: sourceCodes) {
+				sourceCode = URLDecoder.decode(sourceCodes[0], Charset.forName("UTF-8"));
 				Matcher matcher = pattern.matcher(sourceCode);
 				if (matcher.find()) {
 					String fileName = matcher.group() + ".java";
