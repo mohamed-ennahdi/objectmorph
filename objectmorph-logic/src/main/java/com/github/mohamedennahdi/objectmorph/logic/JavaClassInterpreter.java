@@ -43,7 +43,7 @@ public class JavaClassInterpreter {
 			
 			if( ocu.isPresent() ) {
 				CompilationUnit cu = ocu.get();
-				this.className = cu.getPrimaryTypeName().get();
+				this.className = cu.getTypes().get(0).getNameAsString();
 				this.packageName = cu.getPackageDeclaration().isPresent() ? cu.getPackageDeclaration().get().getName().asString() : "";
 				this.decl = cu.getClassByName(this.className).get();
 			}
