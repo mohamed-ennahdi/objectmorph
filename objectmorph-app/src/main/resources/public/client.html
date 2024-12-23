@@ -6,6 +6,7 @@
 		<script type="text/javascript" src="version.js" ></script>
 	</head>
 	<body onload="getVersion()" >
+		<a href = "/"  >Home</a>
 		<h1>Objectmorph Sample Client</h1>
 		<h3>This page executes client side code.</h3>
 		<h4>
@@ -28,7 +29,7 @@
 		function dropfile(file) {
 		  var reader = new FileReader();
 		  reader.onload = function(e) {
-			files.push(e.target.result);
+			files.push(encodeURIComponent(e.target.result));
 		  };
 		  reader.readAsText(file, "UTF-8");
 		}
