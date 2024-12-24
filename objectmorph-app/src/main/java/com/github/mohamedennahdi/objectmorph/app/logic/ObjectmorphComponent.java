@@ -13,7 +13,7 @@ public class ObjectmorphComponent {
 	
 	private ObjectmorphComponent() {}
 
-	public  HTMLGenerator getHtmlGenerator(File... files) {
+	public  HTMLGenerator getHtmlGenerator(File... files) throws Exception {
 		htmlGenerator = new HTMLGenerator(files);
 		return htmlGenerator;
 	}

@@ -3,7 +3,6 @@ package com.github.mohamedennahdi.objectmorph.renderer;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.File;
-import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -30,7 +29,7 @@ public class HTMLGeneratorTextTest {
 	String text2 = "package com.github.mohamedennahdi; class SourceCode2 { int attribute3; SourceCode1 attribute4; }";
 	String text3 = "package com.github.mohamedennahdi; class SourceCodeUnary { protected Object attribute5; public SourceCodeUnary attribute6; }";
 
-	private HTMLGenerator createTestSubject() throws IOException {
+	private HTMLGenerator createTestSubject() throws Exception {
 		
 		
 		final Path tempFile1 = Files.createFile(tempDir.resolve("SourceCode1.java"));
@@ -43,7 +42,7 @@ public class HTMLGeneratorTextTest {
 	}
 
 	
-	private HTMLGenerator createTestUnarySubject() throws IOException {
+	private HTMLGenerator createTestUnarySubject() throws Exception {
 		
 		final Path tempFile = Files.createFile(tempDir.resolve("SourceCodeUnary.java"));
 		

@@ -10,6 +10,7 @@ import static j2html.TagCreator.title;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.net.URISyntaxException;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -28,7 +29,7 @@ public class HTMLGenerator {
 	List<JavaClassInterpreter> interpreters = new ArrayList<>();
 	List<TableTag> tables = new ArrayList<>();
 	
-	public HTMLGenerator(File... sourceCodeClasses) {
+	public HTMLGenerator(File... sourceCodeClasses) throws Exception {
 		for (File sourceCodeClass : sourceCodeClasses) {
 			HTMLIndividualGenerator generator;
 			try {
@@ -36,8 +37,9 @@ public class HTMLGenerator {
 				tables.add(generator.generateFullClassHTML());
 				JavaClassInterpreter interpreter = generator.getInterpreter();
 				interpreters.add(interpreter);
-			} catch (URISyntaxException | FileNotFoundException e) {
+			} catch (URISyntaxException | FileNotFoundException | ParseException e) {
 				log.error(e.getMessage(), e);
+				throw e;
 			}
 		}
 	}
