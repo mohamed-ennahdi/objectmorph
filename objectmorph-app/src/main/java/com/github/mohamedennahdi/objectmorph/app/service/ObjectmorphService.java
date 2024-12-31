@@ -2,9 +2,7 @@ package com.github.mohamedennahdi.objectmorph.app.service;
 
 import java.io.File;
 import java.io.FileWriter;
-import java.io.IOException;
 import java.io.Writer;
-import java.net.URISyntaxException;
 import java.net.URLDecoder;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
@@ -28,7 +26,7 @@ public class ObjectmorphService {
 		this.objectmorphLogic = objectmorphLogic;
 	}
 
-	public String generateHTML(String[] sourceCodes) throws IOException, URISyntaxException {
+	public String generateHTML(String[] sourceCodes) throws Exception {
 		List<File> files = new ArrayList<>(); 
 		try {
 			String patternString = "(?<=class ).*?(?=\\s)";

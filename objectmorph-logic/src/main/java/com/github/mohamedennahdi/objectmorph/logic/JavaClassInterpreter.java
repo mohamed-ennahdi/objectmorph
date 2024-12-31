@@ -2,6 +2,7 @@ package com.github.mohamedennahdi.objectmorph.logic;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.text.ParseException;
 import java.util.List;
 import java.util.Optional;
 
@@ -28,7 +29,7 @@ public class JavaClassInterpreter {
 	
 	private int instanceId;
 	
-	public JavaClassInterpreter(File myClassSourceFile) {
+	public JavaClassInterpreter(File myClassSourceFile) throws FileNotFoundException, ParseException {
 		
 		INSTANCE_ID ++;
 		
@@ -43,12 +44,16 @@ public class JavaClassInterpreter {
 			
 			if( ocu.isPresent() ) {
 				CompilationUnit cu = ocu.get();
+				if (cu.getTypes().isEmpty()) {
+					throw new ParseException("The source code of " + myClassSourceFile.getName() + " does not compile.", 48);
+				}
 				this.className = cu.getTypes().get(0).getNameAsString();
 				this.packageName = cu.getPackageDeclaration().isPresent() ? cu.getPackageDeclaration().get().getName().asString() : "";
 				this.decl = cu.getClassByName(this.className).get();
 			}
 		} catch (FileNotFoundException e) {
 			log.error(e.getMessage(), e);
+			throw e;
 		}
 	}
 	

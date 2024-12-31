@@ -10,6 +10,7 @@ import static j2html.TagCreator.tr;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.net.URISyntaxException;
+import java.text.ParseException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -27,7 +28,7 @@ public class HTMLIndividualGenerator {
 	private static final String RESOURCES_PATH = "https://help.eclipse.org/latest/topic/org.eclipse.jdt.doc.user/images/org.eclipse.jdt.ui/obj16";
 	private static final String RESOURCES_PATH_SPEC = "https://help.eclipse.org/latest/topic/org.eclipse.jdt.doc.user/images/org.eclipse.jdt.ui/ovr16";
 	
-	public HTMLIndividualGenerator(File srcCodeJavaClass) throws URISyntaxException {
+	public HTMLIndividualGenerator(File srcCodeJavaClass) throws URISyntaxException, FileNotFoundException, ParseException {
 		interpreter = new JavaClassInterpreter(srcCodeJavaClass);
 	}
 	
