@@ -64,7 +64,7 @@ public class HTMLIndividualGenerator {
 													img().withSrc(RESOURCES_PATH + "/field_" + ("none".equals(field.getAccessSpecifier().name().toLowerCase()) ? "default" : field.getAccessSpecifier().name().toLowerCase() )  + "_obj.svg")
 												).withStyle("width: 6%"),
 											td(
-													field.getVariables().get(0).getName().asString() + ": " + field.getVariables().get(0).getTypeAsString()
+													field.getVariables().stream().map(v ->  v.getName().asString()).collect(Collectors.joining(", ")) + ": " + field.getVariable(0).getTypeAsString()
 											)
 						))
 				).withStyle("width: 100%").attr("width", "6%");

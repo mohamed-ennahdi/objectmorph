@@ -25,7 +25,7 @@ public class HTMLGeneratorTextTest {
 	@TempDir
 	Path tempDir;
 	
-	String text1 = "package test; class SourceCode1 { int attribute1; String attribute2; }";
+	String text1 = "package test; class SourceCode1 { int attribute0, attribute1; String attribute2; }";
 	String text2 = "package com.github.mohamedennahdi; class SourceCode2 { int attribute3; SourceCode1 attribute4; }";
 	String text3 = "package com.github.mohamedennahdi; class SourceCodeUnary { protected Object attribute5; public SourceCodeUnary attribute6; }";
 
