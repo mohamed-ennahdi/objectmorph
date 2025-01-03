@@ -8,7 +8,7 @@
 	</head>
 	<body onload="getVersion()" >
 		<a href = "/"  >Home</a>
-		<h1>Objectmorph Sample Client</h1>
+		<h1>Objectmorph Sample Client <i>(Beta version)</i></h1>
 		<h3>This page executes client side code.</h3>
 		<h4>
 			<i>Executable locally.</i>
@@ -28,11 +28,12 @@
 		var notepad = document.getElementById('notepad');
 		var files = [];
 		function dropfile(file) {
-		  var reader = new FileReader();
-		  reader.onload = function(e) {
-			files.push(encodeURIComponent(e.target.result));
-		  };
-		  reader.readAsText(file, "UTF-8");
+			var reader = new FileReader();
+			reader.onload = function(e) {
+				let jsonObject = {"filename": file.name , "sourceCode": encodeURIComponent(e.target.result)} ;
+				files.push(jsonObject);
+			};
+			reader.readAsText(file, "UTF-8");
 		}
 
 		notepad.ondrop = function(e) {
@@ -40,6 +41,7 @@
 			e.dataTransfer.setData("text/plain","data set in dragstart");
 			for (const file of e.dataTransfer.files) {
 				if (!file.name.includes(".java")) {
+					cosoleo.log('Skipping ' + file.name + ' because it  is not Java file.');
 					continue;
 				}
 				dropfile(file);
@@ -60,13 +62,15 @@
 						const win = window.open(winUrl, "win", `width=512,height=512`);
 			         } else {
 			        	 alert('Error: ' + this.status + " " + this.responseText);
+						 console.log('Error: ' + this.status + " " + this.responseText);
 			    	}
 				};
 		    }
 		    var url = location.protocol + '//' + location.host + "/html";
 		    xhttp.open("POST", url, true);
+		    xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
 			var data = new FormData();
-			data.append('sourceCode', file);
+			data = JSON.stringify(file);
 		  	xhttp.send(data);
 		}
 	</script>
