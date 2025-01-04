@@ -16,9 +16,9 @@ import java.util.stream.Collectors;
 import org.springframework.stereotype.Service;
 
 import com.github.mohamedennahdi.objectmorph.app.dto.SourceCodeDto;
+import com.github.mohamedennahdi.objectmorph.app.exception.ValidationException;
 import com.github.mohamedennahdi.objectmorph.app.logic.ObjectmorphComponent;
 
-import jakarta.validation.ValidationException;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -58,7 +58,7 @@ public class ObjectmorphService {
 		}
 	}
 	
-	private void validateFilenames(SourceCodeDto[] sourceCodes) {
+	private void validateFilenames(SourceCodeDto[] sourceCodes) throws ValidationException {
 		List<String> filenames = Arrays.asList(sourceCodes).stream().map(n -> n.getFilename()).collect(Collectors.toList());
 		Set<String> uniqueFilenames = new HashSet<String>(filenames);
 		if (uniqueFilenames.size() != filenames.size()) {
