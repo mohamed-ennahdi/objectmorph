@@ -7,11 +7,16 @@ import java.net.URLDecoder;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
 import com.github.mohamedennahdi.objectmorph.app.dto.SourceCodeDto;
+import com.github.mohamedennahdi.objectmorph.app.exception.ValidationException;
 import com.github.mohamedennahdi.objectmorph.app.logic.ObjectmorphComponent;
 
 import lombok.extern.slf4j.Slf4j;
@@ -28,6 +33,7 @@ public class ObjectmorphService {
 	public String generateHTML(SourceCodeDto[] sourceCodes) throws Exception {
 		List<File> files = new ArrayList<>(); 
 		try {
+			validateFilenames(sourceCodes);
 	        String path = System.getProperty("user.home");
 			for (SourceCodeDto sourceCode: sourceCodes) {
 				sourceCode.setSourceCode(URLDecoder.decode(sourceCode.getSourceCode(), Charset.forName("UTF-8")));
@@ -49,6 +55,14 @@ public class ObjectmorphService {
 			for (File file : files) {
 				Files.delete(file.toPath());
 			}
+		}
+	}
+	
+	private void validateFilenames(SourceCodeDto[] sourceCodes) throws ValidationException {
+		List<String> filenames = Arrays.asList(sourceCodes).stream().map(n -> n.getFilename()).collect(Collectors.toList());
+		Set<String> uniqueFilenames = new HashSet<String>(filenames);
+		if (uniqueFilenames.size() != filenames.size()) {
+			throw new ValidationException("File names must be unique.");
 		}
 	}
 }
