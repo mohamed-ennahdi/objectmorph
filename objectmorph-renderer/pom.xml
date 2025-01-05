@@ -3,7 +3,7 @@
 	<parent>
 		<groupId>com.github.mohamed-ennahdi</groupId>
 		<artifactId>objectmorph</artifactId>
-		<version>0.1.3</version>
+		<version>0.1.4-SNAPSHOT</version>
 	</parent>
 	<artifactId>objectmorph-renderer</artifactId>
 	<properties>
