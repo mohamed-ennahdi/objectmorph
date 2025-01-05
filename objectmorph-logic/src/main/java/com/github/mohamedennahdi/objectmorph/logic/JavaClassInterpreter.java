@@ -49,7 +49,15 @@ public class JavaClassInterpreter {
 				}
 				this.className = cu.getTypes().get(0).getNameAsString();
 				this.packageName = cu.getPackageDeclaration().isPresent() ? cu.getPackageDeclaration().get().getName().asString() : "";
-				this.decl = cu.getClassByName(this.className).get();
+				Optional<ClassOrInterfaceDeclaration> optional = cu.getClassByName(this.className); 
+				if (optional.isPresent()) {
+					this.decl = optional.get();
+				} else {
+					optional = cu.getInterfaceByName(this.className);
+					if (optional.isPresent()) {
+						this.decl = optional.get();
+					}
+				}
 			}
 		} catch (FileNotFoundException e) {
 			log.error(e.getMessage(), e);
@@ -73,10 +81,14 @@ public class JavaClassInterpreter {
 		return decl.getMethods();
 	}
 	
-	public String  getSuperClassName() {
+	public String getSuperClassName() {
 		if (decl.getExtendedTypes().size() > 0)
 			return decl.getExtendedTypes(0).getNameAsString();
 		else return "";
+	}
+	
+	public boolean isInterface() {
+		return decl.isInterface();
 	}
 
 	public String getPackageName() {

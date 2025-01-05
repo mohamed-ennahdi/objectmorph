@@ -25,8 +25,9 @@ import com.github.mohamedennahdi.objectmorph.logic.JavaClassInterpreter;
 public class HTMLIndividualGenerator {
 	
 	private JavaClassInterpreter interpreter;
-	private static final String RESOURCES_PATH = "https://help.eclipse.org/latest/topic/org.eclipse.jdt.doc.user/images/org.eclipse.jdt.ui/obj16";
-	private static final String RESOURCES_PATH_SPEC = "https://help.eclipse.org/latest/topic/org.eclipse.jdt.doc.user/images/org.eclipse.jdt.ui/ovr16";
+	private static final String ECLIPSE_PATH = "https://help.eclipse.org/latest/topic/org.eclipse.jdt.doc.user/images/org.eclipse.jdt.ui";
+	private static final String RESOURCES_PATH = ECLIPSE_PATH  + "/obj16";
+	private static final String RESOURCES_PATH_SPEC = ECLIPSE_PATH + "/ovr16";
 	
 	public HTMLIndividualGenerator(File srcCodeJavaClass) throws URISyntaxException, FileNotFoundException, ParseException {
 		interpreter = new JavaClassInterpreter(srcCodeJavaClass);
@@ -35,7 +36,7 @@ public class HTMLIndividualGenerator {
 	private TrTag generateClassNameHTML() {
 		return tr(
 				td(
-						img().withSrc(RESOURCES_PATH + "/class_obj.svg").withStyle("top: 4px;position: relative;"),
+						img().withSrc(RESOURCES_PATH + (interpreter.isInterface() ? "/int_obj.svg" : "/class_obj.svg")).withStyle("top: 4px;position: relative;"),
 						b(this.interpreter.getClassName())
 					).attr("valign", "top").attr("align", "center")
 				
