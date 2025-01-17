@@ -48,8 +48,9 @@ public class HTMLGenerator {
 		StringBuilder draggableScript = new StringBuilder();
 		short top = 0;
 		for (JavaClassInterpreter interpreter : interpreters) {
-			draggableScript.append("\n var draggable").append(interpreter.getInstanceId()).append(" = new PlainDraggable(document.getElementById('").append(interpreter.getClassName()).append("'), {onMove: fixLine});");
-			draggableScript.append("\n draggable").append(interpreter.getInstanceId()).append(".top = ").append(top).append(";");
+			String varName = "draggable" + JavaClassInterpreter.getInstanceId();
+			draggableScript.append("\n var ").append(varName).append(" = new PlainDraggable(document.getElementById('").append(interpreter.getClassName()).append("'), {onMove: fixLine});");
+			draggableScript.append("\n ").append(varName).append(".top = ").append(top).append(";");
 			top += 128;
 		}
 		
@@ -68,7 +69,7 @@ public class HTMLGenerator {
 		StringBuilder lineScript = new StringBuilder();
 		StringBuilder fixeLineScript = new StringBuilder("function fixLine() {");
 		for (Relation relation : relations) {
-			String varName = "line" + relation.getInstanceId();
+			String varName = "line" + Relation.getInstanceId();
 			lineScript.append("\n var ").append(varName).append(" = new LeaderLine(document.getElementById('").append(relation.getFrom()).append("'), document.getElementById('").append(relation.getTo()).append("'),  ");
 			lineScript.append(
 					(switch (relation.getLinkType()) {
