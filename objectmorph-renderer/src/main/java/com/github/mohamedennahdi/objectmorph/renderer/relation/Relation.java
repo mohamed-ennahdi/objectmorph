@@ -40,7 +40,6 @@ public class Relation {
 	
 	public Relation(String from, String to, LinkTypes linkType) {
 		super();
-		instanceId ++;
 		
 		this.from = from;
 		this.to = to;
@@ -71,8 +70,8 @@ public class Relation {
 		this.linkType = linkType;
 	}
 	
-	public int getInstanceId() {
-		return instanceId;
+	public static int getInstanceId() {
+		return instanceId ++;
 	}
 	
 	public static void resetInstanceId() {

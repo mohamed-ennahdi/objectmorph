@@ -35,8 +35,6 @@ public class JavaClassInterpreter {
 	
 	public JavaClassInterpreter(File myClassSourceFile) throws FileNotFoundException, ParseException {
 		
-		instanceId ++;
-		
 		JavaParser parser = new JavaParser();
 		
 		ParseResult<CompilationUnit> pr;
@@ -135,8 +133,8 @@ public class JavaClassInterpreter {
 		return packageName;
 	}
 	
-	public int getInstanceId() {
-		return instanceId;
+	public static int getInstanceId() {
+		return instanceId ++;
 	}
 	
 	public static void resetInstanceId() {
