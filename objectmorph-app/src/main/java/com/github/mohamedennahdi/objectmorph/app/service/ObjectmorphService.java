@@ -2,9 +2,10 @@ package com.github.mohamedennahdi.objectmorph.app.service;
 
 import java.io.File;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.io.Writer;
 import java.net.URLDecoder;
-import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -36,20 +37,13 @@ public class ObjectmorphService {
 			validateFilenames(sourceCodes);
 	        String path = System.getProperty("user.home");
 			for (SourceCodeDto sourceCode: sourceCodes) {
-				sourceCode.setSourceCode(URLDecoder.decode(sourceCode.getSourceCode(), Charset.forName("UTF-8")));
+				sourceCode.setSourceCode(URLDecoder.decode(sourceCode.getSourceCode(), StandardCharsets.UTF_8));
 				String fileName = sourceCode.getFilename();
 				log.info("Filename: " + fileName);
-				File file = new File(path + File.separator + fileName);
-				try (Writer fileWriter = new FileWriter(file, false)) {
-					fileWriter.write(sourceCode.getSourceCode());
-				} catch (Exception e) {
-					throw e;
-				}
+				File file = saveFile(path + File.separator + fileName, sourceCode);
 				files.add(file);
 			}
 			return objectmorphLogic.getHtmlGenerator(files.toArray(new File[0])).generateFullHTML();
-		} catch (Exception e) {
-			throw e;
 		} finally {
 			log.info("Files removal.");
 			for (File file : files) {
@@ -60,9 +54,17 @@ public class ObjectmorphService {
 	
 	private void validateFilenames(SourceCodeDto[] sourceCodes) throws ValidationException {
 		List<String> filenames = Arrays.asList(sourceCodes).stream().map(n -> n.getFilename()).collect(Collectors.toList());
-		Set<String> uniqueFilenames = new HashSet<String>(filenames);
+		Set<String> uniqueFilenames = new HashSet<>(filenames);
 		if (uniqueFilenames.size() != filenames.size()) {
 			throw new ValidationException("File names must be unique.");
 		}
+	}
+	
+	private File saveFile(String path, SourceCodeDto sourceCode) throws IOException  {
+		File file = new File(path);
+		try (Writer fileWriter = new FileWriter(file, false)) {
+			fileWriter.write(sourceCode.getSourceCode());
+		}
+		return file;
 	}
 }

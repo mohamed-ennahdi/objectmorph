@@ -14,7 +14,9 @@ import java.text.ParseException;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.github.javaparser.ast.NodeList;
 import com.github.javaparser.ast.body.ConstructorDeclaration;
+import com.github.javaparser.ast.body.EnumConstantDeclaration;
 import com.github.javaparser.ast.body.FieldDeclaration;
 import com.github.javaparser.ast.body.MethodDeclaration;
 
@@ -36,7 +38,7 @@ public class HTMLIndividualGenerator {
 	private TrTag generateClassNameHTML() {
 		return tr(
 				td(
-						img().withSrc(RESOURCES_PATH + (interpreter.isInterface() ? "/int_obj.svg" : "/class_obj.svg")).withStyle("top: 4px;position: relative;"),
+						img().withSrc(RESOURCES_PATH + (interpreter.isInterface() ? "/int_obj.svg" : interpreter.isEnum() ? "/enum_obj.svg" : "/class_obj.svg")).withStyle("top: 4px;position: relative;"),
 						b(this.interpreter.getClassName())
 					).attr("valign", "top").attr("align", "center")
 				
@@ -57,18 +59,29 @@ public class HTMLIndividualGenerator {
 		).withStyle("width: 100%");
 	}
 	
-	private TableTag generateAttributesHTML() throws FileNotFoundException {
+	private TableTag generateAttributesHTML() {
 		List<FieldDeclaration> fields = interpreter.getFields();
+		NodeList<EnumConstantDeclaration> nodes = interpreter.getEntries();
 		return table(
 				each(fields, field -> tr(
 											td(
-													img().withSrc(RESOURCES_PATH + "/field_" + ("none".equals(field.getAccessSpecifier().name().toLowerCase()) ? "default" : field.getAccessSpecifier().name().toLowerCase() )  + "_obj.svg")
+													img().withSrc(RESOURCES_PATH + "/field_" + ("none".equalsIgnoreCase(field.getAccessSpecifier().name()) ? "default" : field.getAccessSpecifier().name().toLowerCase() )  + "_obj.svg")
 												).withStyle("width: 6%"),
 											td(
 													field.getVariables().stream().map(v ->  v.getName().asString()).collect(Collectors.joining(", ")) + ": " + field.getVariable(0).getTypeAsString()
 											)
-						))
-				).withStyle("width: 100%").attr("width", "6%");
+						)),
+				each(nodes, field -> tr(
+						td(
+								img().withSrc(RESOURCES_PATH + "/field_public_obj.svg"),
+								img().withSrc(RESOURCES_PATH_SPEC + "/static_co.svg").withStyle("position: relative; left: -17px; top: -8px;"),
+								img().withSrc(RESOURCES_PATH_SPEC + "/final_co.svg").withStyle("position: relative; left: -26px; top: -8px;")
+						),
+						td(
+								
+								field.toString()
+						)))
+				);
 	}
 	
 	private TableTag generateConstructorsHTML() {
@@ -76,7 +89,7 @@ public class HTMLIndividualGenerator {
 		return table(
 				each(constructors, constructor -> tr(
 											td(
-													img().withSrc(RESOURCES_PATH + "/meth" + ("none".equals(constructor.getAccessSpecifier().name().toLowerCase()) ? "def" : constructor.getAccessSpecifier().name().toLowerCase().substring(0, 3)) + "_obj.svg"),
+													img().withSrc(RESOURCES_PATH + "/meth" + ("none".equalsIgnoreCase(constructor.getAccessSpecifier().name()) ? "def" : constructor.getAccessSpecifier().name().toLowerCase().substring(0, 3)) + "_obj.svg"),
 													img().withSrc(RESOURCES_PATH_SPEC + "/constr_ovr.svg").withStyle("position: relative; left: -13px; top: -4px;")
 													),
 											td( constructor.getName().asString() + "(" + constructor.getParameters().stream().map(p -> p.getTypeAsString()).collect(Collectors.joining(",")) + ")")
@@ -90,7 +103,7 @@ public class HTMLIndividualGenerator {
 		return table(
 				each(methods, method -> tr(
 						td(
-								img().withSrc(RESOURCES_PATH + "/meth" + ("none".equals(method.getAccessSpecifier().name().toLowerCase()) ? "def" : method.getAccessSpecifier().name().toLowerCase().substring(0, 3) )  + "_obj.svg")
+								img().withSrc(RESOURCES_PATH + "/meth" + ("none".equalsIgnoreCase(method.getAccessSpecifier().name()) ? "def" : method.getAccessSpecifier().name().toLowerCase().substring(0, 3) )  + "_obj.svg")
 							),
 						td( 
 								method.getName().asString() + "(" + method.getParameters().stream().map(p -> p.getTypeAsString()).collect(Collectors.joining(",")) + "): " + method.getTypeAsString()  )
@@ -99,7 +112,7 @@ public class HTMLIndividualGenerator {
 				);
 	}
 	
-	public TableTag generateFullClassHTML() throws URISyntaxException, FileNotFoundException {
+	public TableTag generateFullClassHTML() {
 		return
 				table(
 					tr(
@@ -117,14 +130,14 @@ public class HTMLIndividualGenerator {
 							td(
 									this.generateConstructorsHTML()
 								)
-							).withStyle("outline: thin solid; display: " + (interpreter.getConstructors().size() == 0 ? "none" : "visible")),
+							).withStyle("outline: thin solid; display: " + (interpreter.getConstructors().isEmpty() ? "none" : "visible")),
 					tr(
 							td(
 									this.generateMethodsHTML()
 								)
 							).withStyle("outline: thin solid")
 					)
-				.withStyle("background-color: white;").attr("cellspacing", "0").withId(this.interpreter.getClassName());
+				.withStyle("background-color: white;width: 20%").attr("cellspacing", "0").withId(this.interpreter.getClassName());
 	}
 
 	public JavaClassInterpreter getInterpreter() {

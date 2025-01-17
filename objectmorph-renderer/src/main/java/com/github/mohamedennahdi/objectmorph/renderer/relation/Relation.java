@@ -7,9 +7,7 @@ public class Relation {
 	String to;
 	LinkTypes linkType;
 	
-	private int instanceId;
-	
-	private static int INSTANCE_ID = 0;
+	private static int instanceId = 0;
 	
 	public static final String GENERALIZATION_PROPERTIES_SCRIPT =	" {" +
 			"endPlug: 'arrow3'," +
@@ -42,9 +40,7 @@ public class Relation {
 	
 	public Relation(String from, String to, LinkTypes linkType) {
 		super();
-		INSTANCE_ID ++;
-		
-		this.instanceId = INSTANCE_ID;
+		instanceId ++;
 		
 		this.from = from;
 		this.to = to;
@@ -79,8 +75,8 @@ public class Relation {
 		return instanceId;
 	}
 	
-	public void resetInstanceId() {
-		INSTANCE_ID = 0;
+	public static void resetInstanceId() {
+		instanceId = 0;
 	}
 	
 	@Override
