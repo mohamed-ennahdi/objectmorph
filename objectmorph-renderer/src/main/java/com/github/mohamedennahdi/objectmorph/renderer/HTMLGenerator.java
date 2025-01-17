@@ -97,7 +97,7 @@ public class HTMLGenerator {
 				body(
 						div(
 								tables.toArray(new TableTag[0])
-						).withStyle("background-color: gray; margin:0 auto; width: 1080px; height: 768px; border:1px solid black;"),
+						).withStyle("background-color: gray; margin:0 auto; width: 1536px; height: 768px; border:1px solid black;"),
 						script(
 								draggableScript + " \n" + lineScript + "\n " + fixeLineScript
 							)

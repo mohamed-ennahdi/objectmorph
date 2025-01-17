@@ -40,7 +40,7 @@ public class ObjectmorphService {
 				sourceCode.setSourceCode(URLDecoder.decode(sourceCode.getSourceCode(), StandardCharsets.UTF_8));
 				String fileName = sourceCode.getFilename();
 				log.info("Filename: " + fileName);
-				File file = saveFile(path, sourceCode);
+				File file = saveFile(path + File.separator + fileName, sourceCode);
 				files.add(file);
 			}
 			return objectmorphLogic.getHtmlGenerator(files.toArray(new File[0])).generateFullHTML();
