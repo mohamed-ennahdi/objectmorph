@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html  lang="en" >
 	<head>
 		<meta charset="UTF-8">
 		<title>Objectmorph-Sample-Client</title>
@@ -20,14 +20,14 @@
 		<h4>
 			<i>Executable locally.</i>
 		</h4>
-		<div align="center">
+		<div style="text-align:center;" >
 			<textarea id="notepad" placeholder="drag and drop Java source code files here" cols="64" rows="16"  ></textarea>
 		</div>
 	</body>
 	<footer >
-		<div align="right" >
-			<p align="right" >
-				Version: <b><label id="paragraphVersion" ></label></b>
+		<div style="text-align:right;" >
+			<p style="text-align:right;" >
+				Version: <b><span id="paragraphVersion" ></span></b>
 			</p>
 		</div>
 	</footer>
@@ -66,18 +66,17 @@
 					if (this.status == 200) {
 						console.log(this.responseText);
 						const winUrl = URL.createObjectURL(new Blob([this.responseText], { type: "text/html" }));
-						const win = window.open(winUrl, "win", `width=512,height=512`);
+						window.open(winUrl, "win", `width=512,height=768`);
 			         } else {
 			        	 alert('Error: ' + this.status + " " + this.responseText);
 						 console.log('Error: ' + this.status + " " + this.responseText);
 			    	}
 				};
 		    }
-		    var url = location.protocol + '//' + location.host + "/html";
+		    let url = location.protocol + '//' + location.host + "/html";
 		    xhttp.open("POST", url, true);
 		    xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-			var data = new FormData();
-			data = JSON.stringify(file);
+			var data = JSON.stringify(file);
 		  	xhttp.send(data);
 		}
 	</script>

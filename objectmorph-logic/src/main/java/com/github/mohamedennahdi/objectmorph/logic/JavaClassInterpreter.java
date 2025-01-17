@@ -3,14 +3,19 @@ package com.github.mohamedennahdi.objectmorph.logic;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 import com.github.javaparser.JavaParser;
 import com.github.javaparser.ParseResult;
 import com.github.javaparser.ast.CompilationUnit;
+import com.github.javaparser.ast.NodeList;
 import com.github.javaparser.ast.body.ClassOrInterfaceDeclaration;
 import com.github.javaparser.ast.body.ConstructorDeclaration;
+import com.github.javaparser.ast.body.EnumConstantDeclaration;
+import com.github.javaparser.ast.body.EnumDeclaration;
 import com.github.javaparser.ast.body.FieldDeclaration;
 import com.github.javaparser.ast.body.MethodDeclaration;
 
@@ -21,19 +26,16 @@ public class JavaClassInterpreter {
 
 	
 	private ClassOrInterfaceDeclaration decl;
+	private EnumDeclaration enumDecl;
 	
 	private String className;
 	private String packageName;
 	
-	private static int INSTANCE_ID = 0;
-	
-	private int instanceId;
+	private static int instanceId = 0;
 	
 	public JavaClassInterpreter(File myClassSourceFile) throws FileNotFoundException, ParseException {
 		
-		INSTANCE_ID ++;
-		
-		this.instanceId = INSTANCE_ID;
+		instanceId ++;
 		
 		JavaParser parser = new JavaParser();
 		
@@ -56,6 +58,13 @@ public class JavaClassInterpreter {
 					optional = cu.getInterfaceByName(this.className);
 					if (optional.isPresent()) {
 						this.decl = optional.get();
+					} else {
+						Optional<EnumDeclaration> enumOptional = cu.getEnumByName(this.className);
+						if (enumOptional.isPresent()) {
+							this.enumDecl = enumOptional.get();
+						} else {
+							throw new UnsupportedOperationException();
+						}
 					}
 				}
 			}
@@ -70,25 +79,56 @@ public class JavaClassInterpreter {
 	}
 	
 	public List<FieldDeclaration>  getFields() {
-        return decl.getFields();
+		if (Objects.isNull(this.decl)) {
+			return new ArrayList<>();
+		} else {
+			return decl.getFields();
+		}
+	}
+	
+	public NodeList<EnumConstantDeclaration>  getEntries() {
+		if (Objects.isNull(this.enumDecl)) {
+			return new NodeList<>();
+		} else {
+			return enumDecl.getEntries();
+		}
 	}
 	
 	public List<ConstructorDeclaration>  getConstructors() {
+		if (Objects.isNull(this.decl)) {
+			return new ArrayList<>();
+		}
 		return decl.getConstructors();
 	}
 	
 	public List<MethodDeclaration>  getMethods() {
+		if (Objects.isNull(this.decl)) {
+			return new ArrayList<>();
+		}
 		return decl.getMethods();
 	}
 	
 	public String getSuperClassName() {
-		if (decl.getExtendedTypes().size() > 0)
+		if (Objects.isNull(this.decl)) {
+			return "";
+		}
+		if (decl.getExtendedTypes().isNonEmpty())
 			return decl.getExtendedTypes(0).getNameAsString();
 		else return "";
 	}
 	
 	public boolean isInterface() {
+		if (Objects.isNull(decl)) {
+			return false;
+		}
 		return decl.isInterface();
+	}
+	
+	public boolean isEnum() {
+		if (Objects.isNull(enumDecl)) {
+			return false;
+		}
+		return enumDecl.isEnumDeclaration();
 	}
 
 	public String getPackageName() {
@@ -96,10 +136,10 @@ public class JavaClassInterpreter {
 	}
 	
 	public int getInstanceId() {
-		return this.instanceId;
+		return instanceId;
 	}
 	
-	public void resetInstanceId() {
-		INSTANCE_ID = 0;
+	public static void resetInstanceId() {
+		instanceId = 0;
 	}
 }

@@ -44,12 +44,13 @@ public class HTMLGenerator {
 		}
 	}
 	
-	public String generateFullHTML() throws FileNotFoundException, URISyntaxException {		
-		String draggableScript = "";
+	public String generateFullHTML() {		
+		StringBuilder draggableScript = new StringBuilder();
 		short top = 0;
 		for (JavaClassInterpreter interpreter : interpreters) {
-			draggableScript += "\n var draggable" + interpreter.getInstanceId() +" = new PlainDraggable(document.getElementById('"+ interpreter.getClassName() +"'), {onMove: fixLine});";
-			draggableScript += "\n draggable" + interpreter.getInstanceId() +".top = "+ (top += 128) +";";
+			draggableScript.append("\n var draggable").append(interpreter.getInstanceId()).append(" = new PlainDraggable(document.getElementById('").append(interpreter.getClassName()).append("'), {onMove: fixLine});");
+			draggableScript.append("\n draggable").append(interpreter.getInstanceId()).append(".top = ").append(top).append(";");
+			top += 128;
 		}
 		
 		List<Relation> relations = new ArrayList<>();
@@ -64,26 +65,27 @@ public class HTMLGenerator {
 		relations = new ArrayList<>(set);
 		
 		
-		String lineScript = "";
-		String fixeLineScript = "function fixLine() {";
+		StringBuilder lineScript = new StringBuilder();
+		StringBuilder fixeLineScript = new StringBuilder("function fixLine() {");
 		for (Relation relation : relations) {
 			String varName = "line" + relation.getInstanceId();
-			lineScript += 	"\n var " + varName + " = new LeaderLine(document.getElementById('" + relation.getFrom() + "'), document.getElementById('" + relation.getTo() + "'),  " + 
+			lineScript.append("\n var ").append(varName).append(" = new LeaderLine(document.getElementById('").append(relation.getFrom()).append("'), document.getElementById('").append(relation.getTo()).append("'),  ");
+			lineScript.append(
 					(switch (relation.getLinkType()) {
 						case GENERALIZATION -> Relation.GENERALIZATION_PROPERTIES_SCRIPT;
 						case ASSOCIATION -> Relation.ASSOCIATION_PROPERTIES_SCRIPT;
 						case UNARY -> Relation.UNARY_PROPERTIES_SCRIPT;
 						default -> throw new IllegalArgumentException("Unexpected value: " + relation.getLinkType());
-					});
-			fixeLineScript += varName + ".position(); ";
+					}));
+			fixeLineScript.append(varName).append(".position(); ");
 		}
-		fixeLineScript += " } ";
+		fixeLineScript.append(" } ");
 		
 		if (!relations.isEmpty()) {
-			relations.get(0).resetInstanceId();
+			Relation.resetInstanceId();
 		}
 		if (!interpreters.isEmpty()) {
-			interpreters.get(0).resetInstanceId();
+			JavaClassInterpreter.resetInstanceId();
 		}
 				
 		return html(
