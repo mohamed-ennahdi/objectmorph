@@ -9,11 +9,11 @@
         </title>
     </head>
     <body style="font-family: consolas">
-        <div style="background-color: gray; margin:0 auto; width: 1080px; height: 768px; border:1px solid black;">
-            <table style="background-color: white;" cellspacing="0" id="SourceCodeUnary">
+        <div style="background-color: gray; margin:0 auto; width: 2048px; height: 2048px; border:1px solid black;resize: both; overflow: auto;">
+            <table style="background-color: white;width: 20%; font-size: small" cellspacing="0" id="SourceCodeUnary">
                 <tr id="SourceCodeUnaryUnary" style="outline: thin solid">
                     <td>
-                        <table style="width: 100%">
+                        <table style="width: 100%; font-size: small">
                             <tr>
                                 <td valign="top" align="center">
                                     <img src="https://help.eclipse.org/latest/topic/org.eclipse.jdt.doc.user/images/org.eclipse.jdt.ui/obj16/class_obj.svg" style="top: 4px;position: relative;">
@@ -32,7 +32,7 @@
                 </tr>
                 <tr style="outline: thin solid">
                     <td>
-                        <table style="width: 100%" width="6%">
+                        <table style="font-size: small">
                             <tr>
                                 <td style="width: 6%">
                                     <img src="https://help.eclipse.org/latest/topic/org.eclipse.jdt.doc.user/images/org.eclipse.jdt.ui/obj16/field_protected_obj.svg">
@@ -54,21 +54,25 @@
                 </tr>
                 <tr style="outline: thin solid; display: none">
                     <td>
-                        <table>
+                        <table style="; font-size: small">
                         </table>
                     </td>
                 </tr>
                 <tr style="outline: thin solid">
                     <td>
-                        <table>
+                        <table style="; font-size: small">
                         </table>
                     </td>
                 </tr>
             </table>
         </div>
         <script>
-             var draggable1 = new PlainDraggable(document.getElementById('SourceCodeUnary'), {onMove: fixLine});  var line1 = new LeaderLine(document.getElementById('SourceCodeUnary'), document.getElementById('SourceCodeUnaryUnary'),   {startSocket: 'right',endSocket: 'top',path: 'grid',startSocketGravity: 100,endSocketGravity: 50,color: 'red',endPlug: 'behind'}); function fixLine() {line1.position();  } 
+            
+             var draggable0 = new PlainDraggable(document.getElementById('SourceCodeUnary'), {onMove: fixLine});
+             draggable0.top = 0; 
+            
+             var line0 = new LeaderLine(document.getElementById('SourceCodeUnary'), document.getElementById('SourceCodeUnaryUnary'),   {startSocket: 'right',endSocket: 'top',path: 'grid',startSocketGravity: 100,endSocketGravity: 50,color: 'red',endPlug: 'behind'});
+             function fixLine() {line0.position();  } 
         </script>
     </body>
 </html>
-

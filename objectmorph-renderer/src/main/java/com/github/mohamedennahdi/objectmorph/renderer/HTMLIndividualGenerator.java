@@ -9,7 +9,6 @@ import static j2html.TagCreator.tr;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.net.URISyntaxException;
 import java.text.ParseException;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -31,7 +30,7 @@ public class HTMLIndividualGenerator {
 	private static final String RESOURCES_PATH = ECLIPSE_PATH  + "/obj16";
 	private static final String RESOURCES_PATH_SPEC = ECLIPSE_PATH + "/ovr16";
 	
-	public HTMLIndividualGenerator(File srcCodeJavaClass) throws URISyntaxException, FileNotFoundException, ParseException {
+	public HTMLIndividualGenerator(File srcCodeJavaClass) throws FileNotFoundException, ParseException {
 		interpreter = new JavaClassInterpreter(srcCodeJavaClass);
 	}
 	
@@ -56,7 +55,7 @@ public class HTMLIndividualGenerator {
 		return table(
 					generateClassNameHTML(),
 					generatePackageNameHTML()
-		).withStyle("width: 100%");
+		).withStyle("width: 100%; font-size: small");
 	}
 	
 	private TableTag generateAttributesHTML() {
@@ -81,7 +80,7 @@ public class HTMLIndividualGenerator {
 								
 								field.toString()
 						)))
-				);
+				).withStyle("font-size: small");
 	}
 	
 	private TableTag generateConstructorsHTML() {
@@ -95,7 +94,7 @@ public class HTMLIndividualGenerator {
 											td( constructor.getName().asString() + "(" + constructor.getParameters().stream().map(p -> p.getTypeAsString()).collect(Collectors.joining(",")) + ")")
 										)
 				)
-		);
+		).withStyle("; font-size: small");
 	}
 	
 	private TableTag generateMethodsHTML() {
@@ -109,7 +108,7 @@ public class HTMLIndividualGenerator {
 								method.getName().asString() + "(" + method.getParameters().stream().map(p -> p.getTypeAsString()).collect(Collectors.joining(",")) + "): " + method.getTypeAsString()  )
 							)
 					)
-				);
+				).withStyle("; font-size: small");
 	}
 	
 	public TableTag generateFullClassHTML() {
@@ -137,7 +136,7 @@ public class HTMLIndividualGenerator {
 								)
 							).withStyle("outline: thin solid")
 					)
-				.withStyle("background-color: white;width: 20%").attr("cellspacing", "0").withId(this.interpreter.getClassName());
+				.withStyle("background-color: white;width: 20%; font-size: small").attr("cellspacing", "0").withId(this.interpreter.getClassName());
 	}
 
 	public JavaClassInterpreter getInterpreter() {

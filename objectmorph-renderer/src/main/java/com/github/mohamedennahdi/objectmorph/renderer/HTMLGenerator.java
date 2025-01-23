@@ -9,11 +9,11 @@ import static j2html.TagCreator.title;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.net.URISyntaxException;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 import com.github.mohamedennahdi.objectmorph.logic.JavaClassInterpreter;
@@ -37,7 +37,7 @@ public class HTMLGenerator {
 				tables.add(generator.generateFullClassHTML());
 				JavaClassInterpreter interpreter = generator.getInterpreter();
 				interpreters.add(interpreter);
-			} catch (URISyntaxException | FileNotFoundException | ParseException e) {
+			} catch (FileNotFoundException | ParseException e) {
 				log.error(e.getMessage(), e);
 				throw e;
 			}
@@ -70,14 +70,26 @@ public class HTMLGenerator {
 		StringBuilder fixeLineScript = new StringBuilder("function fixLine() {");
 		for (Relation relation : relations) {
 			String varName = "line" + Relation.getInstanceId();
-			lineScript.append("\n var ").append(varName).append(" = new LeaderLine(document.getElementById('").append(relation.getFrom()).append("'), document.getElementById('").append(relation.getTo()).append("'),  ");
+			lineScript.append("\n var ")
+					  .append(varName)
+					  .append(" = new LeaderLine(document.getElementById('")
+					  .append(relation.getFrom()).append("'), document.getElementById('")
+					  .append(relation.getTo()).append("'),  ");
 			lineScript.append(
-					(switch (relation.getLinkType()) {
+					switch (relation.getLinkType()) {
 						case GENERALIZATION -> Relation.GENERALIZATION_PROPERTIES_SCRIPT;
 						case ASSOCIATION -> Relation.ASSOCIATION_PROPERTIES_SCRIPT;
 						case UNARY -> Relation.UNARY_PROPERTIES_SCRIPT;
 						default -> throw new IllegalArgumentException("Unexpected value: " + relation.getLinkType());
-					}));
+					}).append(
+						Objects.isNull(relation.getCardinality()) ? 
+							"" : switch (relation.getCardinality()) {
+							case MANY_TO_ONE -> " startLabel: '*', endLabel: '1'";
+							case ONE_TO_MANY -> " startLabel: '1', endLabel: '*'";
+						}
+					);
+			
+			lineScript.append("});");
 			fixeLineScript.append(varName).append(".position(); ");
 		}
 		fixeLineScript.append(" } ");
@@ -98,7 +110,7 @@ public class HTMLGenerator {
 				body(
 						div(
 								tables.toArray(new TableTag[0])
-						).withStyle("background-color: gray; margin:0 auto; width: 1536px; height: 768px; border:1px solid black;"),
+						).withStyle("background-color: gray; margin:0 auto; width: 2048px; height: 2048px; border:1px solid black;resize: both; overflow: auto;"),
 						script(
 								draggableScript + " \n" + lineScript + "\n " + fixeLineScript
 							)

@@ -11,6 +11,7 @@ import java.util.Optional;
 import com.github.javaparser.JavaParser;
 import com.github.javaparser.ParseResult;
 import com.github.javaparser.ast.CompilationUnit;
+import com.github.javaparser.ast.ImportDeclaration;
 import com.github.javaparser.ast.NodeList;
 import com.github.javaparser.ast.body.ClassOrInterfaceDeclaration;
 import com.github.javaparser.ast.body.ConstructorDeclaration;
@@ -30,6 +31,7 @@ public class JavaClassInterpreter {
 	
 	private String className;
 	private String packageName;
+	private NodeList<ImportDeclaration> imports;
 	
 	private static int instanceId = 0;
 	
@@ -44,6 +46,7 @@ public class JavaClassInterpreter {
 			
 			if( ocu.isPresent() ) {
 				CompilationUnit cu = ocu.get();
+				this.imports = cu.getImports();
 				if (cu.getTypes().isEmpty()) {
 					throw new ParseException("The source code of " + myClassSourceFile.getName() + " does not compile.", 48);
 				}
@@ -131,6 +134,10 @@ public class JavaClassInterpreter {
 
 	public String getPackageName() {
 		return packageName;
+	}
+	
+	public NodeList<ImportDeclaration> getImports() {
+		return this.imports;
 	}
 	
 	public static int getInstanceId() {

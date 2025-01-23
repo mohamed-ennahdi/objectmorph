@@ -1,11 +1,16 @@
 package com.github.mohamedennahdi.objectmorph.renderer.relation;
 
+import com.github.mohamedennahdi.objectmorph.renderer.relation.enums.Cardinality;
 import com.github.mohamedennahdi.objectmorph.renderer.relation.enums.LinkTypes;
 
+import lombok.Getter;
+
+@Getter
 public class Relation {
 	String from;
 	String to;
 	LinkTypes linkType;
+	Cardinality cardinality;
 	
 	private static int instanceId = 0;
 	
@@ -17,16 +22,14 @@ public class Relation {
 			"endPlugOutline: true,"+
 			"outline: true,"+
 			"outlineColor: 'black',"+
-			"endPlugSize: 5" +
-			"});";
+			"endPlugSize: 5";
 
 	public static final String ASSOCIATION_PROPERTIES_SCRIPT =	" {" +
 		  	"endPlug: 'behind'," +
 			"path: 'straight',"+
 			"color: 'black'," +
 			"outline: true," +
-			"outlineColor: 'black',"+
-		"});";
+			"outlineColor: 'black',";
 	
 	public static final String UNARY_PROPERTIES_SCRIPT =	" {" +
 			"startSocket: 'right'," +
@@ -35,8 +38,7 @@ public class Relation {
 			"startSocketGravity: 100," +
 			"endSocketGravity: 50," +
 			"color: 'red'," +
-			"endPlug: 'behind'" +
-			"});";
+			"endPlug: 'behind'";
 	
 	public Relation(String from, String to, LinkTypes linkType) {
 		super();
@@ -45,31 +47,12 @@ public class Relation {
 		this.to = to;
 		this.linkType = linkType;
 	}
-
-	public String getFrom() {
-		return from;
-	}
-
-	public void setFrom(String from) {
-		this.from = from;
-	}
-
-	public String getTo() {
-		return to;
-	}
-
-	public void setTo(String to) {
-		this.to = to;
-	}
-
-	public LinkTypes getLinkType() {
-		return linkType;
-	}
-
-	public void setLinkType(LinkTypes linkType) {
-		this.linkType = linkType;
-	}
 	
+	public Relation(String from, String to, LinkTypes linkType, Cardinality cardinality) {
+		this(from, to, linkType);
+		this.cardinality = cardinality;
+	}
+
 	public static int getInstanceId() {
 		return instanceId ++;
 	}
