@@ -56,7 +56,7 @@ public class HTMLIndividualGenerator {
 		return table(
 					generateClassNameHTML(),
 					generatePackageNameHTML()
-		).withStyle("width: 100%");
+		).withStyle("width: 100%; font-size: small");
 	}
 	
 	private TableTag generateAttributesHTML() {
@@ -81,7 +81,7 @@ public class HTMLIndividualGenerator {
 								
 								field.toString()
 						)))
-				);
+				).withStyle("font-size: small");
 	}
 	
 	private TableTag generateConstructorsHTML() {
@@ -95,7 +95,7 @@ public class HTMLIndividualGenerator {
 											td( constructor.getName().asString() + "(" + constructor.getParameters().stream().map(p -> p.getTypeAsString()).collect(Collectors.joining(",")) + ")")
 										)
 				)
-		);
+		).withStyle("; font-size: small");
 	}
 	
 	private TableTag generateMethodsHTML() {
@@ -109,7 +109,7 @@ public class HTMLIndividualGenerator {
 								method.getName().asString() + "(" + method.getParameters().stream().map(p -> p.getTypeAsString()).collect(Collectors.joining(",")) + "): " + method.getTypeAsString()  )
 							)
 					)
-				);
+				).withStyle("; font-size: small");
 	}
 	
 	public TableTag generateFullClassHTML() {
@@ -137,7 +137,7 @@ public class HTMLIndividualGenerator {
 								)
 							).withStyle("outline: thin solid")
 					)
-				.withStyle("background-color: white;width: 20%").attr("cellspacing", "0").withId(this.interpreter.getClassName());
+				.withStyle("background-color: white;width: 20%; font-size: small").attr("cellspacing", "0").withId(this.interpreter.getClassName());
 	}
 
 	public JavaClassInterpreter getInterpreter() {

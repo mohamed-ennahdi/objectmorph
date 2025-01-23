@@ -1,14 +1,23 @@
 package com.github.mohamedennahdi.objectmorph.renderer.relation;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
+import com.github.javaparser.ast.ImportDeclaration;
+import com.github.javaparser.ast.NodeList;
 import com.github.javaparser.ast.body.FieldDeclaration;
 import com.github.javaparser.ast.body.VariableDeclarator;
 
 import com.github.mohamedennahdi.objectmorph.logic.JavaClassInterpreter;
+import com.github.mohamedennahdi.objectmorph.renderer.relation.enums.Cardinality;
 import com.github.mohamedennahdi.objectmorph.renderer.relation.enums.LinkTypes;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 public class RelationRenderer {
 	List<JavaClassInterpreter> interpreters;
 	
@@ -73,15 +82,45 @@ public class RelationRenderer {
 	private List<Relation> updateRelations(List<FieldDeclaration> fields1, JavaClassInterpreter interpreter1, JavaClassInterpreter interpreter2) {
 		List<Relation> relations = new ArrayList<>();
 		for (FieldDeclaration fieldDeclaration : fields1) {
-			VariableDeclarator varDecl = fieldDeclaration.getVariables().get(0);
-			if (varDecl.getTypeAsString().equalsIgnoreCase(interpreter2.getClassName())) {
-				if (interpreter1.getClassName().equals(interpreter2.getClassName())) {
-					relations.add(new Relation(interpreter1.getClassName(), interpreter2.getClassName() + "Unary", LinkTypes.UNARY));
+			for (VariableDeclarator varDecl : fieldDeclaration.getVariables()) {
+				if (varDecl.getTypeAsString().equalsIgnoreCase(interpreter2.getClassName())) {
+					if (interpreter1.getClassName().equals(interpreter2.getClassName())) {
+						relations.add(new Relation(interpreter1.getClassName(), interpreter2.getClassName() + "Unary", LinkTypes.UNARY));
+					} else {
+						relations.add(new Relation(interpreter1.getClassName(), interpreter2.getClassName(), LinkTypes.ASSOCIATION));
+					}
 				} else {
-					relations.add(new Relation(interpreter1.getClassName(), interpreter2.getClassName(), LinkTypes.ASSOCIATION));
+					if ((varDecl.getTypeAsString().contains("<" + interpreter2.getClassName() + ">") && isLisArrayOrCollectionOrMap(interpreter1, varDecl))) {
+						if (interpreter1.getClassName().equals(interpreter2.getClassName())) {
+							relations.add(new Relation(interpreter1.getClassName(), interpreter2.getClassName() + "Unary", LinkTypes.UNARY));
+						} else {
+							relations.add(new Relation(interpreter1.getClassName(), interpreter2.getClassName(), LinkTypes.ASSOCIATION, Cardinality.ONE_TO_MANY));
+						}
+					} else if (varDecl.getTypeAsString().equalsIgnoreCase(interpreter2.getClassName()+"[]") && varDecl.getTypeAsString().contains("[]")) {
+						relations.add(new Relation(interpreter1.getClassName(), interpreter2.getClassName(), LinkTypes.ASSOCIATION, Cardinality.ONE_TO_MANY));
+					}
 				}
 			}
 		}
 		return relations;
+	}
+	
+	private boolean isLisArrayOrCollectionOrMap(JavaClassInterpreter interpreter, VariableDeclarator varDecl) {
+		NodeList<ImportDeclaration> imports = interpreter.getImports();
+		String typeName = varDecl.getType().getChildNodes().get(0).toString();
+		Optional<ImportDeclaration> importDecl = imports.stream()
+														.filter(imp -> (imp.getNameAsString() + ";").contains("." + typeName + ";"))
+														.findAny();
+		if (importDecl.isPresent()) {
+			try {
+				Class<?> cls = Class.forName(importDecl.get().getNameAsString());
+				boolean isCollection = Collection.class.isAssignableFrom(cls);
+				boolean isMap = Map.class.isAssignableFrom(cls);
+				return isCollection || isMap;
+			} catch (ClassNotFoundException e) {
+				log.warn(e.getMessage());
+			}
+		}
+		return false;
 	}
 }
