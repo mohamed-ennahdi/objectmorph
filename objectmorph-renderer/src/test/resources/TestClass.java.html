@@ -4,14 +4,16 @@
         </script>
         <script src="https://cdn.jsdelivr.net/npm/leader-line-new@1.1.9/leader-line.min.js">
         </script>
-        <title>ClassDiagram</title>
+        <title>
+            Class Diagram
+        </title>
     </head>
     <body style="font-family: consolas">
-        <div style="background-color: gray; margin:0 auto; width: 1080px; height: 768px; border:1px solid black;">
-            <table style="background-color: white;" cellspacing="0" id="SourceCode1">
+        <div style="background-color: gray; margin:0 auto; width: 2048px; height: 2048px; border:1px solid black;resize: both; overflow: auto;">
+            <table style="background-color: white;width: 20%; font-size: small" cellspacing="0" id="SourceCode1">
                 <tr id="SourceCode1Unary" style="outline: thin solid">
                     <td>
-                        <table style="width: 100%">
+                        <table style="width: 100%; font-size: small">
                             <tr>
                                 <td valign="top" align="center">
                                     <img src="https://help.eclipse.org/latest/topic/org.eclipse.jdt.doc.user/images/org.eclipse.jdt.ui/obj16/class_obj.svg" style="top: 4px;position: relative;">
@@ -30,7 +32,7 @@
                 </tr>
                 <tr style="outline: thin solid">
                     <td>
-                        <table style="width: 100%" width="6%">
+                        <table style="font-size: small">
                             <tr>
                                 <td style="width: 6%">
                                     <img src="https://help.eclipse.org/latest/topic/org.eclipse.jdt.doc.user/images/org.eclipse.jdt.ui/obj16/field_default_obj.svg">
@@ -52,21 +54,21 @@
                 </tr>
                 <tr style="outline: thin solid; display: none">
                     <td>
-                        <table>
+                        <table style="; font-size: small">
                         </table>
                     </td>
                 </tr>
                 <tr style="outline: thin solid">
                     <td>
-                        <table>
+                        <table style="; font-size: small">
                         </table>
                     </td>
                 </tr>
             </table>
-            <table style="background-color: white;" cellspacing="0" id="SourceCode2">
+            <table style="background-color: white;width: 20%; font-size: small" cellspacing="0" id="SourceCode2">
                 <tr id="SourceCode2Unary" style="outline: thin solid">
                     <td>
-                        <table style="width: 100%">
+                        <table style="width: 100%; font-size: small">
                             <tr>
                                 <td valign="top" align="center">
                                     <img src="https://help.eclipse.org/latest/topic/org.eclipse.jdt.doc.user/images/org.eclipse.jdt.ui/obj16/class_obj.svg" style="top: 4px;position: relative;">
@@ -85,7 +87,7 @@
                 </tr>
                 <tr style="outline: thin solid">
                     <td>
-                        <table style="width: 100%" width="6%">
+                        <table style="font-size: small">
                             <tr>
                                 <td style="width: 6%">
                                     <img src="https://help.eclipse.org/latest/topic/org.eclipse.jdt.doc.user/images/org.eclipse.jdt.ui/obj16/field_default_obj.svg">
@@ -107,22 +109,27 @@
                 </tr>
                 <tr style="outline: thin solid; display: none">
                     <td>
-                        <table>
+                        <table style="; font-size: small">
                         </table>
                     </td>
                 </tr>
                 <tr style="outline: thin solid">
                     <td>
-                        <table>
+                        <table style="; font-size: small">
                         </table>
                     </td>
                 </tr>
             </table>
         </div>
         <script>
-             var draggable1 = new PlainDraggable(document.getElementById('SourceCode1'), {onMove: fixLine});
-			 var draggable2 = new PlainDraggable(document.getElementById('SourceCode2'), {onMove: fixLine});
-			 var line1 = new LeaderLine(document.getElementById('SourceCode2'), document.getElementById('SourceCode1'),   {endPlug: 'behind',path: 'straight',color: 'black',outline: true,outlineColor: 'black',}); function fixLine() {line1.position();  } 
+            
+             var draggable0 = new PlainDraggable(document.getElementById('SourceCode1'), {onMove: fixLine});
+             draggable0.top = 0;
+             var draggable1 = new PlainDraggable(document.getElementById('SourceCode2'), {onMove: fixLine});
+             draggable1.top = 128; 
+            
+             var line0 = new LeaderLine(document.getElementById('SourceCode2'), document.getElementById('SourceCode1'),   {endPlug: 'behind',path: 'straight',color: 'black',outline: true,outlineColor: 'black',});
+             function fixLine() {line0.position();  } 
         </script>
     </body>
 </html>
