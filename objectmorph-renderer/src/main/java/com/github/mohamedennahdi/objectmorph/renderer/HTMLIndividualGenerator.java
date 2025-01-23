@@ -9,7 +9,6 @@ import static j2html.TagCreator.tr;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.net.URISyntaxException;
 import java.text.ParseException;
 import java.util.List;
 import java.util.stream.Collectors;
