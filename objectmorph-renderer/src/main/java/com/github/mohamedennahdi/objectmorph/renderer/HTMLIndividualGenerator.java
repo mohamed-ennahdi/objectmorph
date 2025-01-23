@@ -31,7 +31,7 @@ public class HTMLIndividualGenerator {
 	private static final String RESOURCES_PATH = ECLIPSE_PATH  + "/obj16";
 	private static final String RESOURCES_PATH_SPEC = ECLIPSE_PATH + "/ovr16";
 	
-	public HTMLIndividualGenerator(File srcCodeJavaClass) throws URISyntaxException, FileNotFoundException, ParseException {
+	public HTMLIndividualGenerator(File srcCodeJavaClass) throws FileNotFoundException, ParseException {
 		interpreter = new JavaClassInterpreter(srcCodeJavaClass);
 	}
 	

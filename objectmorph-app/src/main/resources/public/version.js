@@ -1,5 +1,5 @@
 function getVersion() {
-    var xhttp = new XMLHttpRequest();
+    let xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
 		if (this.readyState == 4) {
 			if (this.status == 200) {
@@ -9,7 +9,7 @@ function getVersion() {
 			}
          }
     };
-    var url = location.protocol + '//' + location.host + "/version";
+    let url = location.protocol + '//' + location.host + "/version";
     xhttp.open("GET", url, true);
   	xhttp.send(null);
 }
