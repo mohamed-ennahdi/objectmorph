@@ -7,12 +7,11 @@ import java.io.Writer;
 import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
-import java.util.ArrayList;
+import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
@@ -31,40 +30,38 @@ public class ObjectmorphService {
 		this.objectmorphLogic = objectmorphLogic;
 	}
 
-	public String generateHTML(SourceCodeDto[] sourceCodes) throws Exception {
-		List<File> files = new ArrayList<>(); 
+	public String generateHTML(SourceCodeDto[] sourceCodes, String sessionId) throws Exception {
 		try {
 			validateFilenames(sourceCodes);
 	        String path = System.getProperty("user.home");
+	        String sessionFolder = path + File.separator + sessionId + File.separator;
+	        Files.createDirectories(Paths.get(sessionFolder));
 			for (SourceCodeDto sourceCode: sourceCodes) {
 				sourceCode.setSourceCode(URLDecoder.decode(sourceCode.getSourceCode(), StandardCharsets.UTF_8));
 				String fileName = sourceCode.getFilename();
 				log.info("Filename: " + fileName);
-				File file = saveFile(path + File.separator + fileName, sourceCode);
-				files.add(file);
+				saveFile(sessionFolder + fileName, sourceCode);
 			}
-			return objectmorphLogic.getHtmlGenerator(files.toArray(new File[0])).generateFullHTML();
+			
+			File folder = new File(sessionFolder);
+			return objectmorphLogic.getHtmlGenerator(folder.listFiles()).generateFullHTML();
 		} finally {
-			log.info("Files removal.");
-			for (File file : files) {
-				Files.delete(file.toPath());
-			}
+			log.info("finally bloc: do nothing for now");
 		}
 	}
 	
 	private void validateFilenames(SourceCodeDto[] sourceCodes) throws ValidationException {
-		List<String> filenames = Arrays.asList(sourceCodes).stream().map(n -> n.getFilename()).collect(Collectors.toList());
+		List<String> filenames = Arrays.asList(sourceCodes).stream().map(n -> n.getFilename()).toList();
 		Set<String> uniqueFilenames = new HashSet<>(filenames);
 		if (uniqueFilenames.size() != filenames.size()) {
 			throw new ValidationException("File names must be unique.");
 		}
 	}
 	
-	private File saveFile(String path, SourceCodeDto sourceCode) throws IOException  {
+	private void saveFile(String path, SourceCodeDto sourceCode) throws IOException  {
 		File file = new File(path);
 		try (Writer fileWriter = new FileWriter(file, false)) {
 			fileWriter.write(sourceCode.getSourceCode());
 		}
-		return file;
 	}
 }

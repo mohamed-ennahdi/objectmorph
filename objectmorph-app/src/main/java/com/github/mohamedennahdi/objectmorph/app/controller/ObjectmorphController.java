@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.context.request.RequestContextHolder;
 
 import com.github.mohamedennahdi.objectmorph.app.dto.SourceCodeDto;
 import com.github.mohamedennahdi.objectmorph.app.service.ObjectmorphService;
@@ -34,7 +35,9 @@ public class ObjectmorphController {
 									   @RequestBody	SourceCodeDto[] sourceCode) {
 		try {
 			String html = "";
-			html = objectmorphService.generateHTML(sourceCode);
+			String sessionId = RequestContextHolder.getRequestAttributes().getSessionId();
+			log.info("Session: " + sessionId);
+			html = objectmorphService.generateHTML(sourceCode, sessionId);
 			return new ResponseEntity<>(html, HttpStatus.OK);
 		} catch (Exception e) {
 			log.error("Error in ObjectmorphController", e);
