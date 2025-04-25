@@ -12,3 +12,6 @@ logging:
     console: "[%level] %d{yyyy-MM-dd HH:mm:ss} - %logger{1.} - %msg%n"
 server:
   max-http-request-header-size: 65000
+  servlet:
+    session:
+      timeout: 600s
