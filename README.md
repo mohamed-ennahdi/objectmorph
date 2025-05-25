@@ -45,7 +45,7 @@ Render.com allows to deploy Spring Boot applications available as Docker images 
 
 objectmorph-app is deployed under Render, and is accessible with the following url:
 
-https://objectmorph-app.onrender.com/
+https://objectmorph.onrender.com/
 
 # Conclusion
 
