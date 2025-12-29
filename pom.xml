@@ -8,6 +8,7 @@
 		<module>objectmorph-app</module>
 		<module>objectmorph-logic</module>
 		<module>objectmorph-renderer</module>
+		<module>objectmorph-auth</module>
 	</modules>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
