@@ -6,6 +6,8 @@ spring:
     groupId: "@project.groupId@"
     artifactId: "@project.artifactId@"
 logging:
+  logstash:
+    server: ${LOGSTASH_SERVER}
   level:
     root: INFO
   pattern:
