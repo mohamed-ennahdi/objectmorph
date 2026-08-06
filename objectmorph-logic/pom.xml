@@ -9,6 +9,7 @@
 	<properties>
 		<maven.compiler.source>17</maven.compiler.source>
 		<maven.compiler.target>17</maven.compiler.target>
+		<com.github.javaparser.version>3.26.3</com.github.javaparser.version>
 	</properties>
 	<description>This module helps to retrieve Java class source code metadata
 		using javaparser API
@@ -24,7 +25,12 @@
 		<dependency>
 			<groupId>com.github.javaparser</groupId>
 			<artifactId>javaparser-core</artifactId>
-			<version>3.26.3</version>
+			<version>${com.github.javaparser.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.github.javaparser</groupId>
+			<artifactId>javaparser-symbol-solver-core</artifactId>
+			<version>${com.github.javaparser.version}</version>
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
 		<dependency>

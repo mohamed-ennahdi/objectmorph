@@ -136,7 +136,7 @@ public class HTMLIndividualGenerator {
 								)
 							).withStyle("outline: thin solid")
 					)
-				.withStyle("background-color: white;width: 20%; font-size: small").attr("cellspacing", "0").withId(this.interpreter.getClassName());
+				.withStyle("background-color: white;width: auto; font-size: small;white-space: nowrap;").attr("cellspacing", "0").withId(this.interpreter.getClassName());
 	}
 
 	public JavaClassInterpreter getInterpreter() {
