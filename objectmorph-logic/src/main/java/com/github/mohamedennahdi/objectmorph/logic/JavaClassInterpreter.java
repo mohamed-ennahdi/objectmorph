@@ -2,6 +2,8 @@ package com.github.mohamedennahdi.objectmorph.logic;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,6 +12,7 @@ import java.util.Optional;
 
 import com.github.javaparser.JavaParser;
 import com.github.javaparser.ParseResult;
+import com.github.javaparser.StaticJavaParser;
 import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.ImportDeclaration;
 import com.github.javaparser.ast.NodeList;
@@ -19,6 +22,11 @@ import com.github.javaparser.ast.body.EnumConstantDeclaration;
 import com.github.javaparser.ast.body.EnumDeclaration;
 import com.github.javaparser.ast.body.FieldDeclaration;
 import com.github.javaparser.ast.body.MethodDeclaration;
+import com.github.javaparser.resolution.TypeSolver;
+import com.github.javaparser.symbolsolver.JavaSymbolSolver;
+import com.github.javaparser.symbolsolver.resolution.typesolvers.CombinedTypeSolver;
+import com.github.javaparser.symbolsolver.resolution.typesolvers.JavaParserTypeSolver;
+import com.github.javaparser.symbolsolver.resolution.typesolvers.ReflectionTypeSolver;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -37,6 +45,16 @@ public class JavaClassInterpreter {
 	
 	public JavaClassInterpreter(File myClassSourceFile) throws FileNotFoundException, ParseException {
 		
+		Path sourceRoot = Paths.get(myClassSourceFile.getParent());
+		TypeSolver reflectionSolver = new ReflectionTypeSolver();
+        TypeSolver javaParserSolver = new JavaParserTypeSolver(sourceRoot.toFile());
+        CombinedTypeSolver combinedSolver = new CombinedTypeSolver();
+        combinedSolver.add(reflectionSolver);
+        combinedSolver.add(javaParserSolver);
+        
+        JavaSymbolSolver symbolSolver = new JavaSymbolSolver(combinedSolver);
+        StaticJavaParser.getParserConfiguration().setSymbolResolver(symbolSolver);
+		
 		JavaParser parser = new JavaParser();
 		
 		ParseResult<CompilationUnit> pr;
@@ -45,7 +63,7 @@ public class JavaClassInterpreter {
 			Optional<CompilationUnit> ocu = pr.getResult();
 			
 			if( ocu.isPresent() ) {
-				CompilationUnit cu = ocu.get();
+				CompilationUnit cu = StaticJavaParser.parse(myClassSourceFile);
 				this.imports = cu.getImports();
 				if (cu.getTypes().isEmpty()) {
 					throw new ParseException("The source code of " + myClassSourceFile.getName() + " does not compile.", 48);

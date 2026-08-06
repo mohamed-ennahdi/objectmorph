@@ -9,8 +9,22 @@
         </title>
     </head>
     <body style="font-family: consolas">
+        <div>
+            <button type="button" class="btn btn-primary" onclick="if(window.opener) {
+	let targetUrl = window.opener.location.origin + &#x27;/reset&#x27;;
+	fetch(targetUrl, { method: &#x27;POST&#x27; }) .then(response =&gt; {
+    	if(response.ok) {
+                window.opener.location.reload();
+                window.close();
+		}
+	});
+}">
+                Reset
+            </button>
+        </div>
+        <br>
         <div style="background-color: gray; margin:0 auto; width: 2048px; height: 2048px; border:1px solid black;resize: both; overflow: auto;">
-            <table style="background-color: white;width: 20%; font-size: small" cellspacing="0" id="SourceCodeUnary">
+            <table style="background-color: white;width: auto; font-size: small;white-space: nowrap;" cellspacing="0" id="SourceCodeUnary">
                 <tr id="SourceCodeUnaryUnary" style="outline: thin solid">
                     <td>
                         <table style="width: 100%; font-size: small">
@@ -54,13 +68,13 @@
                 </tr>
                 <tr style="outline: thin solid; display: none">
                     <td>
-                        <table style="; font-size: small">
+                        <table style="font-size: small">
                         </table>
                     </td>
                 </tr>
                 <tr style="outline: thin solid">
                     <td>
-                        <table style="; font-size: small">
+                        <table style="font-size: small">
                         </table>
                     </td>
                 </tr>
@@ -71,7 +85,12 @@
              var draggable0 = new PlainDraggable(document.getElementById('SourceCodeUnary'), {onMove: fixLine});
              draggable0.top = 0; 
             
-             var line0 = new LeaderLine(document.getElementById('SourceCodeUnary'), document.getElementById('SourceCodeUnaryUnary'),   {startSocket: 'right',endSocket: 'top',path: 'grid',startSocketGravity: 100,endSocketGravity: 50,color: 'red',endPlug: 'behind'});
+             var line0 = new LeaderLine(document.getElementById('SourceCodeUnary'), document.getElementById('SourceCodeUnaryUnary'),  {
+            	startSocket: 'right',
+            	endSocket: 'top',
+            	path: 'grid',
+            	color: 'red',
+            	endPlug: 'behind'});
              function fixLine() {line0.position();  } 
         </script>
     </body>

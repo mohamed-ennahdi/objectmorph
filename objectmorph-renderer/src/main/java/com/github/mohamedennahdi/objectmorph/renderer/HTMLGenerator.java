@@ -6,6 +6,8 @@ import static j2html.TagCreator.head;
 import static j2html.TagCreator.html;
 import static j2html.TagCreator.script;
 import static j2html.TagCreator.title;
+import static j2html.TagCreator.br;
+import static j2html.TagCreator.button;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -17,6 +19,7 @@ import java.util.Objects;
 import java.util.Set;
 
 import com.github.mohamedennahdi.objectmorph.logic.JavaClassInterpreter;
+import com.github.mohamedennahdi.objectmorph.renderer.helper.RendererHelper;
 import com.github.mohamedennahdi.objectmorph.renderer.relation.Relation;
 import com.github.mohamedennahdi.objectmorph.renderer.relation.RelationRenderer;
 
@@ -25,10 +28,10 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 public class HTMLGenerator {
-	
+
 	List<JavaClassInterpreter> interpreters = new ArrayList<>();
 	List<TableTag> tables = new ArrayList<>();
-	
+
 	public HTMLGenerator(File... sourceCodeClasses) throws Exception {
 		for (File sourceCodeClass : sourceCodeClasses) {
 			HTMLIndividualGenerator generator;
@@ -43,8 +46,8 @@ public class HTMLGenerator {
 			}
 		}
 	}
-	
-	public String generateFullHTML() {		
+
+	public String generateFullHTML() {
 		StringBuilder draggableScript = new StringBuilder();
 		short top = 0;
 		for (JavaClassInterpreter interpreter : interpreters) {
@@ -53,19 +56,19 @@ public class HTMLGenerator {
 			draggableScript.append("\n ").append(varName).append(".top = ").append(top).append(";");
 			top += 128;
 		}
-		
+
 		List<Relation> relations = new ArrayList<>();
-		
+
 		RelationRenderer rr = new RelationRenderer(interpreters);
-		
+
 		relations.addAll(rr.getGeneralizationRelations());
 		relations.addAll(rr.getAssociationRelations());
 		relations.addAll(rr.getRecursiveRelations());
-		
+
 		Set<Relation> set = new HashSet<>(relations);
 		relations = new ArrayList<>(set);
-		
-		
+
+
 		StringBuilder lineScript = new StringBuilder();
 		StringBuilder fixeLineScript = new StringBuilder("function fixLine() {");
 		for (Relation relation : relations) {
@@ -82,25 +85,25 @@ public class HTMLGenerator {
 						case UNARY -> Relation.UNARY_PROPERTIES_SCRIPT;
 						default -> throw new IllegalArgumentException("Unexpected value: " + relation.getLinkType());
 					}).append(
-						Objects.isNull(relation.getCardinality()) ? 
+						Objects.isNull(relation.getCardinality()) ?
 							"" : switch (relation.getCardinality()) {
 							case MANY_TO_ONE -> " startLabel: '*', endLabel: '1'";
 							case ONE_TO_MANY -> " startLabel: '1', endLabel: '*'";
 						}
 					);
-			
+
 			lineScript.append("});");
 			fixeLineScript.append(varName).append(".position(); ");
 		}
 		fixeLineScript.append(" } ");
-		
+
 		if (!relations.isEmpty()) {
 			Relation.resetInstanceId();
 		}
 		if (!interpreters.isEmpty()) {
 			JavaClassInterpreter.resetInstanceId();
 		}
-				
+
 		return html(
 				head(
 						script().withSrc("https://cdn.jsdelivr.net/npm/plain-draggable@2.5.12/plain-draggable.min.js"),
@@ -108,6 +111,12 @@ public class HTMLGenerator {
 						title("Class Diagram")
 					),
 				body(
+			            div(
+			            		button("Reset").withType("button")
+			                    				  .withClass("btn btn-primary")
+			                    				  .attr("onclick", RendererHelper.readResource("reset-button.properties", HTMLGenerator.class))
+			            ),
+			            br(),
 						div(
 								tables.toArray(new TableTag[0])
 						).withStyle("background-color: gray; margin:0 auto; width: 2048px; height: 2048px; border:1px solid black;resize: both; overflow: auto;"),

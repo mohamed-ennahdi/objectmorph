@@ -7,7 +7,7 @@ spring:
     artifactId: "@project.artifactId@"
 logging:
   logstash:
-    server: ${LOGSTASH_SERVER}
+    server: ${LOGSTASH_SERVER:localhost}
   level:
     root: INFO
   pattern:

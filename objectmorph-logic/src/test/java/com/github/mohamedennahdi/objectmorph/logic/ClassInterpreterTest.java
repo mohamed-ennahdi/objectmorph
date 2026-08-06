@@ -15,6 +15,7 @@ import javax.annotation.processing.Generated;
 
 import org.junit.jupiter.api.Test;
 
+import com.github.javaparser.ParseProblemException;
 import com.github.javaparser.ast.body.FieldDeclaration;
 import com.github.javaparser.ast.body.MethodDeclaration;
 
@@ -25,11 +26,11 @@ public class ClassInterpreterTest {
 		String className = "TestClass.java";
 		return new JavaClassInterpreter(Paths.get(getClass().getResource(className).toURI()).toFile());
 	}
-	
+
 	@Test
 	public void instantiationWithCompilationErrorTest() throws FileNotFoundException, URISyntaxException {
 		String className = "TestClassWithCompilationError.java";
-		assertThrows(ParseException.class, () -> {
+		assertThrows(ParseProblemException.class, () -> {
 			new JavaClassInterpreter(Paths.get(getClass().getResource(className).toURI()).toFile());
 		}, "The source code of " + className + " does not compile.");
 	}
@@ -42,11 +43,11 @@ public class ClassInterpreterTest {
 		// default test
 		testSubject = createTestSubject();
 		result = testSubject.getFields();
-		
+
 		assertNotNull(result);
 		assertEquals(5, result.size());
 	}
-	
+
 	@Test
 	public void getMethodsTest() throws Exception {
 		JavaClassInterpreter testSubject;
@@ -55,7 +56,7 @@ public class ClassInterpreterTest {
 		// default test
 		testSubject = createTestSubject();
 		result = testSubject.getMethods();
-		
+
 		assertNotNull(result);
 		assertEquals(10, result.size());
 	}

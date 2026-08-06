@@ -14,6 +14,8 @@ import com.github.mohamedennahdi.objectmorph.app.dto.SourceCodeDto;
 import com.github.mohamedennahdi.objectmorph.app.service.ObjectmorphService;
 
 import io.swagger.v3.oas.annotations.Parameter;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -54,5 +56,15 @@ public class ObjectmorphController {
 			log.error("Error in ObjectmorphController", e);
 			return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
 		}
+	}
+	
+	@CrossOrigin(origins = "*")
+	@PostMapping( value = "/reset" )
+	public ResponseEntity<String> reset(HttpServletRequest request) {
+		HttpSession session = request.getSession(false); 
+        if (session != null) {
+            session.invalidate(); // Clears all attributes and terminates the session
+        }
+        return new ResponseEntity<>("Session cleared successfully", HttpStatus.OK);
 	}
 }
